@@ -1,0 +1,49 @@
+body{
+    font-family: 'Raleway', sans-serif;
+}
+section header{
+    font-size: 250%;
+    text-align: center;
+    padding: 1.5%;
+}
+
+
+
+
+
+
+aside.main {
+    width: inherit;
+    background: #e4e4e4;
+
+}
+
+nav ul li{
+    float: left;
+    list-style-type: none;
+    padding-bottom: 1.2%;
+    padding-top: 1.2%;
+    padding-right: 20px;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: inherit;
+}
+nav ul li a:hover{
+    color: aqua;
+}
+
+table {
+    width: 100%;
+}
+
+
+th,
+td {
+    text-align: left;
+    padding: 0.4%;
+}
+nav {
+
+}

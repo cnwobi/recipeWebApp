@@ -1,19 +1,63 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Recipes</title>
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/unsemantic-grid-responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
 </head>
-<body>
-<nav>
-    <ul>
 
-    </ul>
-</nav>
-<h1>My Recipesa</h1>
-<h2>Name buck2491</h2>
+<body class="grid-container">
 
+
+
+<aside class="main">
+    <div class="navbar.fixed">
+        <nav class="black">
+            <div class="nav-wrapper">
+                <ul>
+                    <li><a href="javascript:void(0);">Home</a> </li>
+                    <li><a href="javascript:void(0);">Recipes</a></li>
+                    <li><a href="javascript:void(0);">Ingredients</a></li>
+                    <li><a href="javascript:void(0);">About</a></li>
+                </ul>
+
+            </div>
+        </nav>
+    </div>
+
+</aside>
+<!-- end aside.main -->
+<section class="content">
+    <header class="masthead"> Recipes
+    </header>
+    <!-- end header.masthead -->
+    <article>
+        <table>
+            <tr>
+                <th>Description</th>
+                <th>Preperation Time</th>
+                <th>Cooking Time </th>
+                <th>Difficulty</th>
+            </tr>
+            <tr th:each="recipe:${recipes}">
+                <td th:text="${recipe.description}"> Tasting goodness</td>
+                <td th:text="${recipe.prepTime + ' minutes'}">25 seconds</td>
+                <td th:text="${recipe.cookTime + ' minutes'}"></td>
+                <td th:text="${recipe.difficulty.name().toLowerCase()}"></td>
+            </tr>
+
+        </table>
+    </article>
+    <!-- end article -->
+</section>
+<!-- end section.content -->
+
+<!-- end .container -->
 
 </body>
+
 </html>

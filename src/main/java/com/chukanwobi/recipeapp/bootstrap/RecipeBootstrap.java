@@ -5,6 +5,7 @@ import com.chukanwobi.recipeapp.repositories.CategoryRepository;
 import com.chukanwobi.recipeapp.repositories.IngredientsRepository;
 import com.chukanwobi.recipeapp.repositories.RecipeRepository;
 import com.chukanwobi.recipeapp.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+
+@Slf4j
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
     private CategoryRepository categoryRepository;
@@ -25,6 +28,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
 
         recipeRepository.saveAll(getRecipes());
+        log.debug("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLoading bootstrap data\n\n\n\n\n\n\n\n\n\n\n");
     }
 
     public RecipeBootstrap(CategoryRepository categoryRepository, IngredientsRepository ingredientsRepository, RecipeRepository recipeRepository, UnitOfMeasureRepository unitOfMeasureRepository) {

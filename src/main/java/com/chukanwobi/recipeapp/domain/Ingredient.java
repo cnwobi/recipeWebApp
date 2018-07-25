@@ -3,7 +3,6 @@ package com.chukanwobi.recipeapp.domain;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 public class Ingredient {
@@ -15,9 +14,9 @@ public class Ingredient {
     private BigDecimal amount;
     @OneToOne(fetch = FetchType.EAGER)
     private UnitOfMeasure unitOfMeasure;
-    @ManyToMany
-    @JoinTable(name = "ingredient_recipes", inverseJoinColumns =  @JoinColumn(name = "ingredient_id"), joinColumns = @JoinColumn(name = "recipe_id"))
-    private Set<Recipe> recipes= new HashSet<>();
+    @ManyToOne
+
+    private Recipe recipe;
 
     public Long getId() {
         return id;
@@ -27,7 +26,7 @@ public class Ingredient {
         this.description = description;
         this.amount = amount;
         this.unitOfMeasure = unitOfMeasure;
-        this.recipes.add(recipe);
+        this.recipe = recipe;
     }
 
     public void setId(Long id) {
@@ -50,12 +49,12 @@ public class Ingredient {
         this.amount = amount;
     }
 
-    public Set<Recipe> getRecipes() {
-        return recipes;
+    public Recipe getRecipe() {
+        return recipe;
     }
 
-    public void setRecipes(Set<Recipe> recipes) {
-        this.recipes = recipes;
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 
     public UnitOfMeasure getUnitOfMeasure() {

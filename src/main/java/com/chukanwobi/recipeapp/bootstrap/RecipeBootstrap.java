@@ -5,6 +5,8 @@ import com.chukanwobi.recipeapp.repositories.CategoryRepository;
 import com.chukanwobi.recipeapp.repositories.IngredientsRepository;
 import com.chukanwobi.recipeapp.repositories.RecipeRepository;
 import com.chukanwobi.recipeapp.repositories.UnitOfMeasureRepository;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -13,12 +15,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 @Component
-public class RecipeBootstrap {
+public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
     private CategoryRepository categoryRepository;
     private IngredientsRepository ingredientsRepository;
     private RecipeRepository recipeRepository;
     private UnitOfMeasureRepository unitOfMeasureRepository;
 
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+
+        recipeRepository.saveAll(getRecipes());
+    }
 
     public RecipeBootstrap(CategoryRepository categoryRepository, IngredientsRepository ingredientsRepository, RecipeRepository recipeRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
         this.categoryRepository = categoryRepository;
@@ -69,7 +76,7 @@ public class RecipeBootstrap {
         UnitOfMeasure cups = cupsUOMOptional.get();
 
 
-        Optional<Category> americanCategoryOptional = categoryRepository.findByDescription("Americana");
+        Optional<Category> americanCategoryOptional = categoryRepository.findByDescription("American");
         if(!americanCategoryOptional.isPresent()){
             throw new RuntimeException("Expected category 'American' not found");
         }
@@ -112,7 +119,7 @@ public class RecipeBootstrap {
         guacRecipe.setNotes(guacNotes);
 
 
-        guacRecipe.getIngredients().add(new Ingredient("ripe avocados", new BigDecimal(2), eachUom,guacRecipe));
+      guacRecipe.getIngredients().add(new Ingredient("ripe avocados", new BigDecimal(2), eachUom,guacRecipe));
         guacRecipe.getIngredients().add(new Ingredient("Kosher salt", new BigDecimal(".5"), teaspoon, guacRecipe));
         guacRecipe.getIngredients().add(new Ingredient("fresh lime juice or lemon juice", new BigDecimal(2), tableSpoon, guacRecipe));
         guacRecipe.getIngredients().add(new Ingredient("minced red onion or thinly sliced green onion", new BigDecimal(2), tableSpoon, guacRecipe));
@@ -179,7 +186,6 @@ public class RecipeBootstrap {
         tacosRecipe.getIngredients().add(new Ingredient("Roughly chopped cilantro", new BigDecimal(4), eachUom, tacosRecipe));
         tacosRecipe.getIngredients().add(new Ingredient("cup sour cream thinned with 1/4 cup milk", new BigDecimal(4), cups, tacosRecipe));
         tacosRecipe.getIngredients().add(new Ingredient("lime, cut into wedges", new BigDecimal(4), eachUom, tacosRecipe));
-
         tacosRecipe.getCategories().add(americanCategory);
         tacosRecipe.getCategories().add(mexicanCategory);
 

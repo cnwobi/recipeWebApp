@@ -1,5 +1,8 @@
 package com.chukanwobi.recipeapp.domain;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,20 +18,28 @@ public class Recipe {
     private Integer servings;
     private String source;
     private String url;
+    @Lob
     private String directions;
 
     @Enumerated(value = EnumType.STRING)
     private Difficulty difficulty;
-    @ManyToMany(mappedBy = "recipes")
-    private Set<Ingredient> ingredients ;
+   @OneToMany(cascade = CascadeType.ALL,mappedBy = "recipe")
+    private Set<Ingredient> ingredients= new HashSet<>();
     @Lob
     private Byte[] image;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
 
-    @ManyToMany (mappedBy = "recipes")
-    private Set<Category> categories = new HashSet<>();
+    @ManyToMany (mappedBy = "recipes",fetch = FetchType.EAGER)
+
+    private Set<Category> categories= new HashSet<>();
+
+    public Recipe() {
+
+
+    }
+
     public Long getId() {
         return id;
     }

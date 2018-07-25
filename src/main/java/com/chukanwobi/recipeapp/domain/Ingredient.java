@@ -2,7 +2,7 @@ package com.chukanwobi.recipeapp.domain;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.HashSet;
+
 
 @Entity
 public class Ingredient {
@@ -20,6 +20,9 @@ public class Ingredient {
 
     public Long getId() {
         return id;
+    }
+
+    public Ingredient() {
     }
 
     public Ingredient(String description, BigDecimal amount, UnitOfMeasure unitOfMeasure, Recipe recipe) {

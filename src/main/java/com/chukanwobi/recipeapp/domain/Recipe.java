@@ -1,7 +1,5 @@
 package com.chukanwobi.recipeapp.domain;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -31,7 +29,7 @@ public class Recipe {
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
 
-    @ManyToMany (mappedBy = "recipes",fetch = FetchType.EAGER)
+    @ManyToMany (mappedBy = "recipes")
 
     private Set<Category> categories= new HashSet<>();
 

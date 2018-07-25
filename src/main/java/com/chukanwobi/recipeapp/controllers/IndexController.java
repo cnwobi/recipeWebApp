@@ -6,6 +6,7 @@ import com.chukanwobi.recipeapp.domain.UnitOfMeasure;
 import com.chukanwobi.recipeapp.repositories.CategoryRepository;
 import com.chukanwobi.recipeapp.repositories.IngredientsRepository;
 import com.chukanwobi.recipeapp.repositories.UnitOfMeasureRepository;
+import com.chukanwobi.recipeapp.services.RecipeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,22 +15,16 @@ import java.util.Optional;
 
 @Controller
 public class IndexController {
-    private IngredientsRepository ingredientsRepository;
-    private UnitOfMeasureRepository unitOfMeasureRepository;
-    private CategoryRepository categoryRepository;
 
-    public IndexController(IngredientsRepository ingredientsRepository, UnitOfMeasureRepository unitOfMeasureRepository, CategoryRepository categoryRepository) {
-        this.ingredientsRepository = ingredientsRepository;
-        this.unitOfMeasureRepository = unitOfMeasureRepository;
-        this.categoryRepository= categoryRepository;
+private final RecipeService recipeService;
+
+    public IndexController(RecipeService recipeService) {
+        this.recipeService = recipeService;
     }
 
     @GetMapping({"","/","/index"})
     public String getIndex(Model model){
-        Optional<UnitOfMeasure> optionalUnitOfMeasure = unitOfMeasureRepository.findByDescription("Pinch");
-        Optional<Category>optionalCategory = categoryRepository.findByDescription("American");
-        model.addAttribute("uom",optionalUnitOfMeasure);
-        model.addAttribute("cat",optionalCategory);
+     model.addAttribute("recipes",recipeService.getRecipes());
         return "index";
     }
 }

@@ -17,10 +17,17 @@ public class Ingredient {
     private UnitOfMeasure unitOfMeasure;
     @ManyToMany
     @JoinTable(name = "ingredient_recipes", inverseJoinColumns =  @JoinColumn(name = "ingredient_id"), joinColumns = @JoinColumn(name = "recipe_id"))
-    private Set<Recipe> recipes;
+    private Set<Recipe> recipes= new HashSet<>();
 
     public Long getId() {
         return id;
+    }
+
+    public Ingredient(String description, BigDecimal amount, UnitOfMeasure unitOfMeasure, Recipe recipe) {
+        this.description = description;
+        this.amount = amount;
+        this.unitOfMeasure = unitOfMeasure;
+        this.recipes.add(recipe);
     }
 
     public void setId(Long id) {

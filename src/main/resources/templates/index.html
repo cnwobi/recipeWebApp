@@ -38,12 +38,14 @@
     <article>
         <table>
             <tr>
+                <th>ID</th>
                 <th>Description</th>
-                <th>Preperation Time</th>
+                <th>Preparation Time</th>
                 <th>Cooking Time </th>
                 <th>Difficulty</th>
             </tr>
             <tr th:each="recipe:${recipes}">
+                <td th:text="${recipe.id}"></td>
                 <td th:text="${recipe.description}"> Tasting goodness</td>
                 <td th:text="${recipe.prepTime + ' minutes'}">25 seconds</td>
                 <td th:text="${recipe.cookTime + ' minutes'}"></td>

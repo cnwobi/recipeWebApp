@@ -49,3 +49,50 @@ td {
 #override div ul li{
     float: right;
 }
+#show_recipe section {
+    margin-bottom: 2rem;
+
+}
+#show_recipe section header{
+    border-top-left-radius:10px;
+    border-top-right-radius: 10px;
+    padding: inherit;
+    font-size: 100%;
+    text-align:left;
+    padding-top: .5%;
+    background-color: black;
+    color: white;
+    clear:both;
+    height: 2rem;
+    font-weight: bolder;
+
+}
+#box_article{
+
+    border: 0.5px solid black;
+
+}
+
+#box_article .categories{
+    padding-top: 1rem;
+}
+
+#box_article ul:not(.browser-default) li {
+
+    list-style: square;
+    list-style-position: inside;
+    padding: auto;
+    padding-top: 0;
+
+}
+#categories ul{
+    display: inline-grid;
+}
+#box_article h5{
+    font-size: 1.2rem;
+    display: inline-block;
+    font-weight:600;
+    margin-bottom: auto;
+
+
+}

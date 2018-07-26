@@ -136,6 +136,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
         guacRecipe.getCategories().add(americanCategory);
         guacRecipe.getCategories().add(mexicanCategory);
+        guacRecipe.setUrl("https://www.simplyrecipes.com/recipes/perfect_guacamole/");
+        guacRecipe.setServings(4);
 
         //add to return list
         recipes.add(guacRecipe);
@@ -194,8 +196,10 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         tacosRecipe.addIngredient(new Ingredient("lime, cut into wedges", new BigDecimal(4), eachUom));
         tacosRecipe.getCategories().add(americanCategory);
         tacosRecipe.getCategories().add(mexicanCategory);
-
+        tacosRecipe.setUrl("https://www.foodnetwork.com/recipes/bobby-flay/spice-rubbed-chicken-breast-tacos-with-grilled-poblanos-bbq-onions-and-coleslaw-recipe-1953280");
         recipes.add(tacosRecipe);
+        tacosRecipe.setServings(5);
+
         return recipes;
     }
 }

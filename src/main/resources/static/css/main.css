@@ -79,10 +79,11 @@ td {
 
 #box_article ul:not(.browser-default) li {
 
-    list-style: square;
+    list-style:initial;
     list-style-position: inside;
     padding: auto;
     padding-top: 0;
+    margin: auto;
 
 }
 #categories ul{

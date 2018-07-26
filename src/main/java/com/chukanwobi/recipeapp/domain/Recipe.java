@@ -2,7 +2,9 @@ package com.chukanwobi.recipeapp.domain;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -35,7 +37,7 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 @OneToMany(cascade = CascadeType.ALL,mappedBy = "recipe")
-    private Set<Direction> directions1 = new HashSet<>();
+    private List<Direction> directions1 = new ArrayList<>();
     public Recipe() {
 
 
@@ -142,11 +144,11 @@ public class Recipe {
         return categories;
     }
 
-    public Set<Direction> getDirections1() {
+    public List<Direction> getDirections1() {
         return directions1;
     }
 
-    public void setDirections1(Set<Direction> directions1) {
+    public void setDirections1(List<Direction> directions1) {
         this.directions1 = directions1;
     }
 

@@ -83,7 +83,6 @@ td {
     list-style-position: inside;
     padding: auto;
     padding-top: 0;
-    margin: auto;
 
 }
 #categories ul{
@@ -96,4 +95,9 @@ td {
     margin-bottom: auto;
 
 
+}
+
+#box_article ol{
+    margin: auto;
+    padding:0 1rem 0;
 }

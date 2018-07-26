@@ -173,7 +173,9 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
                 "Read more: http://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/#ixzz4jvu7Q0MJ");
         tacoNotes.setRecipe(tacosRecipe);
         tacosRecipe.setNotes(tacoNotes);
-
+        tacosRecipe.addDirections(new Direction("Prepare buck"));
+        tacosRecipe.addDirections(new Direction("prepare jason"));
+        tacosRecipe.addDirections(new Direction("prepare dennis"));
 
         tacosRecipe.addIngredient(new Ingredient("Ancho Chili Powder", new BigDecimal(2), tableSpoon));
         tacosRecipe.addIngredient(new Ingredient("Dried Oregano", new BigDecimal(1), teaspoon));

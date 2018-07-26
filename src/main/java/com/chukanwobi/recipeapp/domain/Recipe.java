@@ -34,7 +34,8 @@ public class Recipe {
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
-
+@OneToMany(cascade = CascadeType.ALL,mappedBy = "recipe")
+    private Set<Direction> directions1 = new HashSet<>();
     public Recipe() {
 
 
@@ -141,6 +142,14 @@ public class Recipe {
         return categories;
     }
 
+    public Set<Direction> getDirections1() {
+        return directions1;
+    }
+
+    public void setDirections1(Set<Direction> directions1) {
+        this.directions1 = directions1;
+    }
+
     public void setCategories(Set<Category> categories) {
         this.categories = categories;
     }
@@ -151,4 +160,10 @@ public class Recipe {
         this.ingredients.add(ingredient);
         return this;
     }
+
+     public Recipe addDirections (Direction direction){
+        direction.setRecipe(this);
+        this.directions1.add(direction);
+        return this;
+     }
 }

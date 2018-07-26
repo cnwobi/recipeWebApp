@@ -23,4 +23,8 @@ private final RecipeRepository recipeRepository;
         recipeRepository.findAll().iterator().forEachRemaining(recipeSet::add);
         return recipeSet;
     }
+
+    public Recipe findById(Long L){
+        return null;
+    }
 }

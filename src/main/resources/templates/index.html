@@ -6,23 +6,26 @@
     <title>Recipes</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
-    <link rel="stylesheet" type="text/css" href="/css/unsemantic-grid-responsive.css">
+
+    <link rel="stylesheet" type="text/css" href="/webjars/unsemantic/1.1.3/assets/stylesheets/unsemantic-grid-responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
 </head>
 
-<body class="grid-container">
+<body >
 
 
 
 <aside class="main">
     <div class="navbar.fixed">
-        <nav class="black">
-            <div class="nav-wrapper">
+        <nav class="black" id="override">
+            <div class="nav-wrapper grid-container">
                 <ul>
-                    <li><a href="javascript:void(0);">Home</a> </li>
-                    <li><a href="javascript:void(0);">Recipes</a></li>
-                    <li><a href="javascript:void(0);">Ingredients</a></li>
+
                     <li><a href="javascript:void(0);">About</a></li>
+                    <li><a href="javascript:void(0);">Ingredients</a></li>
+                    <li><a href="javascript:void(0);">Recipes</a></li>
+                    <li><a href="javascript:void(0);">Home</a> </li>
                 </ul>
 
             </div>
@@ -31,7 +34,7 @@
 
 </aside>
 <!-- end aside.main -->
-<section class="content">
+<section class="content grid-container">
     <header class="masthead"> Recipes
     </header>
     <!-- end header.masthead -->
@@ -41,15 +44,16 @@
                 <th>ID</th>
                 <th>Description</th>
                 <th>Preparation Time</th>
-                <th>Cooking Time </th>
                 <th>Difficulty</th>
+                <th>Details </th>
             </tr>
             <tr th:each="recipe:${recipes}">
                 <td th:text="${recipe.id}"></td>
                 <td th:text="${recipe.description}"> Tasting goodness</td>
                 <td th:text="${recipe.prepTime + ' minutes'}">25 seconds</td>
-                <td th:text="${recipe.cookTime + ' minutes'}"></td>
-                <td th:text="${recipe.difficulty.name().toLowerCase()}"></td>
+                <td th:text="${#strings.capitalize(recipe.difficulty.name().toLowerCase())}"></td>
+                <td><a href="#" th:href="@{'/recipe/show/'+${recipe.id}}" th:text="${'View Details'}">View Details</a> </td>
+
             </tr>
 
         </table>
@@ -62,4 +66,5 @@
 
 </body>
 
+<script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
 </html>

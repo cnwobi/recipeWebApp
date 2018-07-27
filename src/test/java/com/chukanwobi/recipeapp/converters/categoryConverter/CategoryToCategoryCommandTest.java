@@ -23,7 +23,7 @@ public static final Set<Recipe> RECIPES= new HashSet<>();
     public void setUp() throws Exception {
 
 coverter = new CategoryToCategoryCommand();
-
+RECIPES.add(new Recipe());
     }
 @Test
 public void testNullParameter(){

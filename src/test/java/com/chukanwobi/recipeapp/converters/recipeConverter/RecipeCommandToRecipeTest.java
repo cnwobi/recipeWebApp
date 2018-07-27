@@ -43,7 +43,9 @@ RecipeCommandToRecipe converter;
     }
 @Test
 public void testObjectIsNotNull(){
-        assertNotNull(converter.convert(new RecipeCommand()));
+        RecipeCommand recipeCommand = new RecipeCommand();
+        recipeCommand.setNotes(new Notes());
+        assertNotNull(converter.convert(recipeCommand));
 }
     @Test
     public void testConvert() {

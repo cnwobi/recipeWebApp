@@ -19,6 +19,7 @@ public class CategoryCommandToCategoryTest {
     @Before
     public void setUp() throws Exception {
         converter =  new CategoryCommandToCategory();
+        RECIPES.add(new Recipe());
     }
 
     @Test

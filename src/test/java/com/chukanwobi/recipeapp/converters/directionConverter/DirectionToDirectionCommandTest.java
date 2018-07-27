@@ -1,4 +1,4 @@
-package com.chukanwobi.recipeapp.converters.directionCommand;
+package com.chukanwobi.recipeapp.converters.directionConverter;
 
 import com.chukanwobi.recipeapp.commands.DirectionCommand;
 import com.chukanwobi.recipeapp.domain.Direction;

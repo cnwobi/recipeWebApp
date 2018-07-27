@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
+
 public class Direction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,8 +16,14 @@ public class Direction {
 
     @ManyToOne
     private Recipe recipe;
+    public Direction(){
+
+    }
 
     public Direction(String steps) {
         this.steps = steps;
     }
+
+
+
 }

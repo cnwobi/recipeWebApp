@@ -22,7 +22,7 @@ public class CategoryCommandToCategoryTest {
     }
 
     @Test
-    public void convert() {
+    public void testReturnNull() {
         assertNull(converter.convert(null));
     }
     @Test

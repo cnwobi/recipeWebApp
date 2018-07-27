@@ -18,8 +18,6 @@ public class Recipe {
     private Integer servings;
     private String source;
     private String url;
-    @Lob
-    private String directions;
 
     @Enumerated(value = EnumType.STRING)
     private Difficulty difficulty;
@@ -37,7 +35,7 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 @OneToMany(cascade = CascadeType.ALL,mappedBy = "recipe")
-    private List<Direction> directions1 = new ArrayList<>();
+    private List<Direction> directions = new ArrayList<>();
     public Recipe() {
 
 
@@ -99,14 +97,6 @@ public class Recipe {
         this.url = url;
     }
 
-    public String getDirections() {
-        return directions;
-    }
-
-    public void setDirections(String directions) {
-        this.directions = directions;
-    }
-
     public Byte[] getImage() {
         return image;
     }
@@ -144,12 +134,12 @@ public class Recipe {
         return categories;
     }
 
-    public List<Direction> getDirections1() {
-        return directions1;
+    public List<Direction> getDirections() {
+        return directions;
     }
 
-    public void setDirections1(List<Direction> directions1) {
-        this.directions1 = directions1;
+    public void setDirections(List<Direction> directions) {
+        this.directions = directions;
     }
 
     public void setCategories(Set<Category> categories) {
@@ -165,7 +155,7 @@ public class Recipe {
 
      public Recipe addDirections (Direction direction){
         direction.setRecipe(this);
-        this.directions1.add(direction);
+        this.directions.add(direction);
         return this;
      }
 }

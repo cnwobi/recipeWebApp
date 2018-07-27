@@ -109,7 +109,7 @@
             <header>Direction</header>
             <article class="grid-100" id="box_article" >
          <ol>
-                <li th:each="direction:${recipe.directions1}" th:text="${direction.steps}"></li>
+                <li th:each="direction:${recipe.directions}" th:utext="${direction.steps}"></li>
          </ol>
             </article>
 

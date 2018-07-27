@@ -1,4 +1,4 @@
-package com.chukanwobi.recipeapp.converters;
+package com.chukanwobi.recipeapp.converters.unitOfMeasureConverter;
 
 import com.chukanwobi.recipeapp.commands.UnitOfMeasureCommand;
 import com.chukanwobi.recipeapp.domain.UnitOfMeasure;

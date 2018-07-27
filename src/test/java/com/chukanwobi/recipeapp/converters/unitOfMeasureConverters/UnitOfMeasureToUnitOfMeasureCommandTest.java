@@ -1,6 +1,7 @@
-package com.chukanwobi.recipeapp.converters;
+package com.chukanwobi.recipeapp.converters.unitOfMeasureConverters;
 
 import com.chukanwobi.recipeapp.commands.UnitOfMeasureCommand;
+import com.chukanwobi.recipeapp.converters.unitOfMeasureConverter.UnitOfMeasureToUnitOfMeasureCommand;
 import com.chukanwobi.recipeapp.domain.UnitOfMeasure;
 import org.junit.Before;
 import org.junit.Test;

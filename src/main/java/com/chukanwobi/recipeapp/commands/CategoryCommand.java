@@ -12,5 +12,5 @@ import java.util.Set;
 public class CategoryCommand {
     private Long id;
     private String description;
-    private Set<Recipe> recipes;
+
 }

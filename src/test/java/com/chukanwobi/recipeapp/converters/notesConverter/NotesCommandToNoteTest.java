@@ -30,12 +30,12 @@ NotesCommandToNote converter;
     public void testConvert() {
         NotesCommand notesCommand = new NotesCommand();
         notesCommand.setId(LONG_VALUE);
-        notesCommand.setRecipe(RECIPE);
+
         notesCommand.setRecipeNotes(RECIPE_NOTES);
         Notes notes = converter.convert(notesCommand);
 
         assertEquals(LONG_VALUE,notes.getId());
-        assertEquals(RECIPE,notes.getRecipe());
+
         assertEquals(RECIPE_NOTES,notes.getRecipeNotes());
     }
 }

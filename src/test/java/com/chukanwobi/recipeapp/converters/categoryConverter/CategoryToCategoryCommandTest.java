@@ -40,11 +40,10 @@ assertNotNull(coverter.convert(new Category()));
         Category category = new Category();
         category.setId(LONG_VALUE);
         category.setDescription(DESCRIPTIONS);
-        category.setRecipes(RECIPES);
+
     CategoryCommand categoryCommand= coverter.convert(category);
     assertEquals(LONG_VALUE,categoryCommand.getId());
     assertEquals(DESCRIPTIONS,categoryCommand.getDescription());
-    assertEquals(RECIPES,categoryCommand.getRecipes());
 
 
 

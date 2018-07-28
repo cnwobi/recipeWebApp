@@ -35,10 +35,10 @@ public class CategoryCommandToCategoryTest {
         CategoryCommand categoryCommand= new CategoryCommand();
         categoryCommand.setId(LONG_VALUE);
         categoryCommand.setDescription(DESCRIPTIONS);
-        categoryCommand.setRecipes(RECIPES);
+
     Category category =  converter.convert(categoryCommand);
     assertEquals(LONG_VALUE,category.getId());
     assertEquals(DESCRIPTIONS,category.getDescription());
-    assertEquals(RECIPES,category.getRecipes());
+
 }
 }

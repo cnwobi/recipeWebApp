@@ -1,11 +1,14 @@
 package com.chukanwobi.recipeapp.converters.recipeConverter;
 
 import com.chukanwobi.recipeapp.commands.RecipeCommand;
+import com.chukanwobi.recipeapp.converters.categoryConverter.CategoryToCategoryCommand;
+import com.chukanwobi.recipeapp.converters.directionConverter.DirectionToDirectionCommand;
+import com.chukanwobi.recipeapp.converters.ingredientsConverter.IngredientToIngredientCommand;
+import com.chukanwobi.recipeapp.converters.notesConverter.NotesToNotesCommand;
+import com.chukanwobi.recipeapp.converters.unitOfMeasureConverter.UnitOfMeasureToUnitOfMeasureCommand;
 import com.chukanwobi.recipeapp.domain.*;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -19,20 +22,25 @@ public class RecipeToRecipeCommandTest {
     public static final String SOURCE = "My source";
     public static final String URL = "www.example.com";
     public static final Difficulty DIFFICULTY = Difficulty.EASY;
-    public static  final Set<Ingredient> INGREDIENT_SET = new HashSet<>();
-
     public static final Byte []IMAGE = {2,3,4,5};
-    public static final Notes NOTES = new Notes();
-    public static final Set<Category> CATEGORY_SET = new HashSet<>();
-    public static final List<Direction> DIRECTION_LIST = new ArrayList<>();
+
+    public static final Long INGREDIENT_ID_1= 1L;
+    public static final Long INGREDIENT_ID_2=2L;
+    public static final Long CATEGORY_ID_1 = 3L;
+    public static final Long CATEGORY_ID_2 = 4L;
+    public static final Long NOTES_ID = 9L;
+
+    public static final Long DIRECTION_ID_2 = 4L;
+    public static final Long DIRECTION_ID = 9L;
+
+
+
 
 
     @Before
     public void setUp() throws Exception {
-        converter = new RecipeToRecipeCommand();
-        INGREDIENT_SET.add(new Ingredient());
-        CATEGORY_SET.add(new Category());
-        DIRECTION_LIST.add(new Direction());
+        converter = new RecipeToRecipeCommand(new CategoryToCategoryCommand(),new DirectionToDirectionCommand(),new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand()),new NotesToNotesCommand());
+
     }
 
     @Test
@@ -55,11 +63,46 @@ public void testObjectIsNotNullWhenNotNullIsPassed(){
         recipe.setSource(SOURCE);
         recipe.setUrl(URL);
         recipe.setDifficulty(DIFFICULTY);
-        recipe.setIngredients(INGREDIENT_SET);
         recipe.setImage(IMAGE);
-        recipe.setNotes(NOTES);
-        recipe.setCategories(CATEGORY_SET);
-        recipe.setDirections(DIRECTION_LIST);
+         // create Note, Directions, Categories ,INgredients add to Recipe
+
+        //Notes
+        Notes notes = new Notes();
+        notes.setId(NOTES_ID);
+
+        recipe.setNotes(notes);
+
+        //directions
+        Direction direction =  new Direction();
+        Direction direction1 =  new Direction();
+
+        direction.setId(DIRECTION_ID);
+        direction1.setId(DIRECTION_ID_2);
+
+        recipe.getDirections().add(direction);
+        recipe.getDirections().add(direction1);
+
+
+        //categories
+        Category category =  new Category();
+        category.setId(CATEGORY_ID_1);
+
+        Category category1 =  new Category();
+        category1.setId(CATEGORY_ID_2);
+
+
+        recipe.getCategories().add(category);
+        recipe.getCategories().add(category1);
+
+//ingredients
+        Ingredient ingredient = new Ingredient();
+        Ingredient ingredient1 = new Ingredient();
+        ingredient.setId(INGREDIENT_ID_1);
+        ingredient.setId(INGREDIENT_ID_2);
+
+        recipe.getIngredients().add(ingredient);
+        recipe.getIngredients().add(ingredient1);
+
 
         recipeCommand = converter.convert(recipe);
         assertEquals(LONG_VALUE,recipeCommand.getId());
@@ -70,11 +113,18 @@ public void testObjectIsNotNullWhenNotNullIsPassed(){
         assertEquals(SOURCE,recipeCommand.getSource());
         assertEquals(URL,recipeCommand.getUrl());
         assertEquals(DIFFICULTY,recipeCommand.getDifficulty());
-        assertEquals(INGREDIENT_SET,recipeCommand.getIngredients());
         assertArrayEquals(IMAGE,recipeCommand.getImage());
-        assertEquals(NOTES,recipeCommand.getNotes());
-        assertEquals(CATEGORY_SET,recipeCommand.getCategories());
-        assertEquals(DIRECTION_LIST,recipeCommand.getDirections());
+
+        assertEquals(NOTES_ID,recipeCommand.getNotes().getId());
+
+        assertEquals(2,recipeCommand.getCategories().size());
+
+        assertEquals(DIRECTION_ID,recipeCommand.getDirections().get(0).getId());
+
+        assertEquals(DIRECTION_ID_2,recipeCommand.getDirections().get(1).getId());
+
+        assertEquals(2,recipeCommand.getIngredients().size());
+
 
 
     }

@@ -1,6 +1,7 @@
 package com.chukanwobi.recipeapp.converters.ingredientsConverter;
 
 import com.chukanwobi.recipeapp.commands.IngredientCommand;
+import com.chukanwobi.recipeapp.converters.unitOfMeasureConverter.UnitOfMeasureToUnitOfMeasureCommand;
 import com.chukanwobi.recipeapp.domain.Ingredient;
 import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
@@ -11,9 +12,17 @@ import java.math.BigDecimal;
 
 @Component
 public class IngredientToIngredientCommand implements Converter<Ingredient,IngredientCommand> {
+    private final UnitOfMeasureToUnitOfMeasureCommand toUnitOfMeasureCommandConverter;
+
+    public IngredientToIngredientCommand(UnitOfMeasureToUnitOfMeasureCommand toUnitOfMeasureCommandConverter) {
+        this.toUnitOfMeasureCommandConverter = toUnitOfMeasureCommandConverter;
+    }
+
     @Override
     @Synchronized
     @Nullable
+
+
     public IngredientCommand convert(Ingredient ingredient) {
         if (ingredient == null) {
             return null;
@@ -22,8 +31,8 @@ public class IngredientToIngredientCommand implements Converter<Ingredient,Ingre
         ingredientCommand.setId(ingredient.getId());
         ingredientCommand.setDescription(ingredient.getDescription());
         ingredientCommand.setAmount(ingredient.getAmount());
-ingredientCommand.setUnitOfMeasure(ingredient.getUnitOfMeasure());
-ingredientCommand.setRecipe(ingredient.getRecipe());
+        ingredientCommand.setUnitOfMeasure(toUnitOfMeasureCommandConverter.convert(ingredient.getUnitOfMeasure()));
+
 
 
         return ingredientCommand;

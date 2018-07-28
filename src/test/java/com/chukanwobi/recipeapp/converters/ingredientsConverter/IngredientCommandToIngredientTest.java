@@ -1,6 +1,8 @@
 package com.chukanwobi.recipeapp.converters.ingredientsConverter;
 
 import com.chukanwobi.recipeapp.commands.IngredientCommand;
+import com.chukanwobi.recipeapp.commands.UnitOfMeasureCommand;
+import com.chukanwobi.recipeapp.converters.unitOfMeasureConverter.UnitOfMeasureCommandToUnitOfMeasure;
 import com.chukanwobi.recipeapp.domain.Ingredient;
 import com.chukanwobi.recipeapp.domain.Recipe;
 import com.chukanwobi.recipeapp.domain.UnitOfMeasure;
@@ -13,15 +15,16 @@ import static org.junit.Assert.*;
 
 public class IngredientCommandToIngredientTest {
   IngredientCommandToIngredient converter;
+  public static final Long UOM_ID =2l;
     public static final Long LONG_ID = 1L;
     public static final String DESCRIPTION = "description";
     public static final BigDecimal AMOUNT = new BigDecimal(2.4);
-    public static final UnitOfMeasure UNIT_OF_MEASURE = new UnitOfMeasure();
+
     public static final Recipe RECIPE = new Recipe();
 
     @Before
     public void setUp() throws Exception {
-        converter = new IngredientCommandToIngredient();
+        converter = new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure());
     }
 @Test
 public void testNullParameter(){
@@ -37,8 +40,13 @@ public void testObjectIsNotNull(){
         ingredientCommand.setId(LONG_ID);
         ingredientCommand.setDescription(DESCRIPTION);
         ingredientCommand.setAmount(AMOUNT);
-        ingredientCommand.setUnitOfMeasure(UNIT_OF_MEASURE);
+
+        UnitOfMeasureCommand unitOfMeasureCommand = new UnitOfMeasureCommand();
+        unitOfMeasureCommand.setId(UOM_ID);
+        ingredientCommand.setUnitOfMeasure(unitOfMeasureCommand);
         ingredientCommand.setRecipe(RECIPE);
+
+
         Ingredient ingredient =  converter.convert(ingredientCommand);
 
         assertNotNull(ingredient);
@@ -46,9 +54,32 @@ public void testObjectIsNotNull(){
         assertEquals(LONG_ID,ingredient.getId());
         assertEquals(DESCRIPTION,ingredient.getDescription());
         assertEquals(AMOUNT,ingredient.getAmount());
-        assertEquals(UNIT_OF_MEASURE,ingredient.getUnitOfMeasure());
+
         assertEquals(RECIPE,ingredient.getRecipe());
 
 
     }
+
+    @Test
+    public void convertWithNullUOM() throws Exception {
+        //given
+        IngredientCommand command = new IngredientCommand();
+        command.setId(LONG_ID);
+        command.setAmount(AMOUNT);
+        command.setDescription(DESCRIPTION);
+        UnitOfMeasureCommand unitOfMeasureCommand = new UnitOfMeasureCommand();
+
+
+        //when
+        Ingredient ingredient = converter.convert(command);
+
+        //then
+        assertNotNull(ingredient);
+        assertNull(ingredient.getUnitOfMeasure());
+        assertEquals(LONG_ID, ingredient.getId());
+        assertEquals(AMOUNT, ingredient.getAmount());
+        assertEquals(DESCRIPTION, ingredient.getDescription());
+
+    }
+
 }

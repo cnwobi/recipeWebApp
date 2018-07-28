@@ -35,7 +35,7 @@ public void testObjectIsNotNull(){
         NotesCommand notesCommand = converter.convert(notes);
 
         assertEquals(LONG_VALUE,notesCommand.getId());
-        assertEquals(RECIPE,notesCommand.getRecipe());
+
         assertEquals(RECIPE_NOTES,notesCommand.getRecipeNotes());
     }
 }

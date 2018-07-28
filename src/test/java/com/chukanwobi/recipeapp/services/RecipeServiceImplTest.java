@@ -1,5 +1,7 @@
 package com.chukanwobi.recipeapp.services;
 
+import com.chukanwobi.recipeapp.converters.recipeConverter.RecipeCommandToRecipe;
+import com.chukanwobi.recipeapp.converters.recipeConverter.RecipeToRecipeCommand;
 import com.chukanwobi.recipeapp.domain.Recipe;
 import com.chukanwobi.recipeapp.repositories.RecipeRepository;
 import org.junit.Before;
@@ -7,9 +9,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -22,21 +22,25 @@ public class RecipeServiceImplTest {
 
     @Mock
     RecipeRepository recipeRepository;
+    @Mock
+    RecipeCommandToRecipe recipeCommandToRecipe;
+    @Mock
+    RecipeToRecipeCommand recipeToRecipeCommand;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository,recipeCommandToRecipe,recipeToRecipeCommand);
     }
 
     @Test
     public void getRecipesTest() throws Exception{
         Recipe recipe =  new Recipe();
-        HashSet recipesData =  new HashSet();
+        List<Recipe> recipesData =  new ArrayList<>();
         recipesData.add(recipe);
 
         when(recipeService.getRecipes()).thenReturn(recipesData);
-        Set<Recipe> recipes = recipeService.getRecipes();
+        List<Recipe> recipes = recipeService.getRecipes();
         assertNotEquals(recipes.size(),0);
         verify(recipeRepository,times(1)).findAll();
     }

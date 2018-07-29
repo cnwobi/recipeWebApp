@@ -99,5 +99,32 @@ td {
 
 #box_article ol{
     margin: auto;
-    padding:1rem ;
+    padding: 1rem;
+}
+
+.headings_text input{
+    display: inline;
+}
+
+#option1 option{
+    list-style: none;
+}
+
+.checkbox-orange[type="checkbox"].filled-in:checked + label:after{
+    border: 2px solid #ff9800;
+    background-color: #ff9800;
+}
+
+#my_button{
+    float: right;
+    margin: 0;
+    color: black;
+    background: white;
+    height: 1.6rem;
+    padding: auto;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    text-transform: capitalize;
+    font-weight: bold;
+    text-align: center;
 }

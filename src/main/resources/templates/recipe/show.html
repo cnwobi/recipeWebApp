@@ -26,7 +26,7 @@
                         <li><a href="javascript:void(0);">About</a></li>
                         <li><a href="javascript:void(0);">Ingredients</a></li>
                         <li><a href="javascript:void(0);">Recipes</a></li>
-                        <li><a href="javascript:void(0);">Home</a> </li>
+                        <li><a href="javascript:void(0);" th:href="@{'/index'}">Home</a> </li>
                     </ul>
 
                 </div>
@@ -78,7 +78,7 @@
                 <div class="grid-50 grid-parent">
                    <div class="grid-100 ">
 
-                       <h5> Difficulty : </h5><span th:text="${#strings.capitalize(recipe.difficulty.toString().toLowerCase())}"> Easy</span></div>
+                       <h5> Difficulty : </h5><span th:if="${recipe.difficulty !=null}"   th:text="${#strings.capitalize(recipe.difficulty.toString().toLowerCase())}"> Easy</span></div>
                     <div class="grid-100">
                         <h5>Servings :</h5> <span th:text="${recipe.servings}">4</span></div>
                     <div class="grid-100">

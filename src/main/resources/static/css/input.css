@@ -1,0 +1,70 @@
+
+
+.black{
+    color: white;
+    background: black
+}
+
+
+
+.side h5{
+    margin: 0;
+}
+
+input[type = text]:focus{
+
+
+
+}
+
+input[type = text], select{
+    font-family: inherit;
+    border: 2px solid #dadada;
+    border-radius: 7px;
+    height: 32px;
+    width: 143px;
+}
+
+#box_article{
+    padding: 3%;}
+
+.notes #box_article{
+    padding: 1%
+}
+.row2{
+    margin: 2%
+}
+
+textarea{
+    font-family: inherit;
+    border: 2px solid #dadada;
+    border-radius: 7px;
+    width: 100%;
+
+}
+.row3 label{
+    display: block;
+
+}
+
+.side{
+    margin-bottom: 2%;
+}
+#recipedescription{
+    display: inline-block;
+}
+.btn{
+    float: right;
+    line-height: .7rem;
+    margin: 0;
+    font-size: .8rem;
+    text-align: center;
+    font-weight: bolder;
+    text-transform: uppercase;
+
+}
+
+#box_article ul{
+    margin-left: 0;
+    padding-left: 0;
+}

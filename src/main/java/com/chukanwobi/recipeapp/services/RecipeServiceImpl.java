@@ -13,6 +13,7 @@ import java.util.*;
 
 @Slf4j
 @Service
+@Transactional
 public class RecipeServiceImpl implements RecipeService {
 private final RecipeRepository recipeRepository;
 private final RecipeCommandToRecipe recipeCommandToRecipe;
@@ -49,5 +50,18 @@ private final RecipeToRecipeCommand recipeToRecipeCommand;
         Recipe savedRecipe = recipeRepository.save(unSavedRecipe);
         log.debug("Saved Recipe: "+ savedRecipe.getId());
         return recipeToRecipeCommand.convert(savedRecipe);
+    }
+
+    @Override
+    @Transactional
+    public RecipeCommand findCommandById(Long id) {
+        return recipeToRecipeCommand.convert(findById(id));
+    }
+
+
+    @Override
+    @Transactional
+    public void deleteById(Long L) {
+recipeRepository.deleteById(L);
     }
 }

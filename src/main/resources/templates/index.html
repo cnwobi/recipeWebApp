@@ -46,6 +46,8 @@
                 <th>Preparation Time</th>
                 <th>Difficulty</th>
                 <th>Details </th>
+                <th>Update</th>
+                <th>Delete</th>
             </tr>
             <tr th:each="recipe:${recipes}">
                 <td th:text="${recipe.id}"></td>
@@ -54,6 +56,9 @@
                 <td th:if="${recipe.difficulty !=null}" th:text="${#strings.capitalize(recipe.difficulty.name().toLowerCase())}">Null Difficulty</td>
                 <td th:if="${recipe.difficulty ==null}"  th:text="${'Null difficulty'}"}></td>
                 <td><a href="#" th:href="@{'/recipe/'+${recipe.id}+'/show/'}" th:text="${'View Details'}">View Details</a> </td>
+                <td><a th:href="@{'/recipe/'+${recipe.id}+'/update/'}" th:text="${'Update'}"></a></td>
+                <td><a th:href="@{'/recipe/'+${recipe.id}+'/delete/'}" th:text="${'Delete'}"></a></td>
+
 
             </tr>
 

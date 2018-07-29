@@ -22,7 +22,7 @@ input[type = text], select{
     border: 2px solid #dadada;
     border-radius: 7px;
     height: 32px;
-    width: 143px;
+    width: 100%;
 }
 
 #box_article{
@@ -63,6 +63,17 @@ textarea{
     text-transform: uppercase;
 
 }
+#btn-special {
+    display: block;
+    line-height: 65%;
+    width: 21%;
+    height: 45px;
+    margin-bottom: 3%;
+    color: white;
+    background: black;
+    margin-right: 40%;
+}
+
 
 #box_article ul{
     margin-left: 0;

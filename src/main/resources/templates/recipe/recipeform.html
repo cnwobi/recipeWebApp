@@ -20,6 +20,7 @@
 </head>
 
 <body class="font">
+
 <aside class="main">
     <div class="navbar.fixed">
         <nav class="black" id="override">
@@ -29,7 +30,7 @@
                     <li><a href="javascript:void(0);">About</a></li>
                     <li><a href="javascript:void(0);">Ingredients</a></li>
                     <li><a href="javascript:void(0);">Recipes</a></li>
-                    <li><a href="javascript:void(0);">Home</a> </li>
+                    <li><a href="javascript:void(0);" th:href="@{'/index'}">Home</a> </li>
                 </ul>
 
             </div>
@@ -40,11 +41,13 @@
 <!--End of asside -->
 
 <section class="grid-100">
-    <header th:text="${recipe.description} + 'details' "> Creating New Recipe</header>
+    <header th:if="${recipe.description!=null}" th:text="${'Updating ' + recipe.description}  "> Creating New Recipe</header>
+    <header th:if="${recipe.description == null}" th:text="${ 'Creating New Recipe'} "> Creating New Recipe</header>
 </section>
 
 <div class="grid-container" id="show_recipe">
     <form th:object="${recipe}" th:action="@{/recipe/}" method="post" >
+        <input type="hidden" th:field="*{id}"/>
         <section class="grid-100">
             <header> Recipe Details </header>
             <div class="grid-100 grid-parent" id="box_article">
@@ -88,21 +91,39 @@
                     <div class=" grid-25 form-group" >
 
                         <label>Difficulty</label>
-                        <select class="form-control">
+                        <select class="form-control" th:field="*{difficulty}">
 
 
 
                             <option value="" disabled selected>Select Difficulty</option>
-                            <option value="1">Easy</option>
-                            <option value="2">Hard</option>
-                            <option value="3">Option 3</option>
+                            <option th:each="difficultyValue : ${T(com.chukanwobi.recipeapp.domain.Difficulty).values()}"
+                                    th:value="${difficultyValue.name()}"
+                                    th:text="${#strings.toLowerCase(difficultyValue.name())}"
+                            >val</option>
+
                         </select>
 
                     </div>
                 </div>
 
                 <!--end third row -->
+                <div class="grid-100 grid-parent row3  sid">
+                    <div class=" grid-25 form-group">
+                        <label>Source</label>
+                        <input type="text" class=" form-control" th:field="*{source}">
+                    </div>
 
+                    <div class=" grid-25 form-group">
+                        <label>Servings </label>
+                        <input type="text" class="form-control" th:field="*{servings}">
+                    </div>
+                    <div class=" grid-25 form-group">
+                        <label>Url </label>
+                        <input type="text" class="form-control" th:field="*{url}">
+                    </div>
+                </div>
+
+                <!--end of fourth row -->
             </div>
             <!---end .box_article-->
 
@@ -145,7 +166,7 @@
         </section>
 
         <!--end of section three-->
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn " id="btn-special">Submit</button>
     </form>
 
 

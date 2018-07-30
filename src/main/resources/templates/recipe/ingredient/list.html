@@ -51,7 +51,7 @@
             </tr>
             <tr th:each="ingredient,iterator:${recipe.ingredients}">
                 <td th:text="${iterator.index + 1}"></td>
-                <td th:text="${ingredient.description}"> Tasting goodness</td>
+                <td th:text="${#strings.capitalize(ingredient.description)}"> Tasting goodness</td>
                 <td th:text="${ingredient.amount}">25 seconds</td>
                 <td th:text="${ingredient.unitOfMeasure.description}"></td>
 

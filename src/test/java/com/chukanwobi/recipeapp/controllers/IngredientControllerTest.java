@@ -1,7 +1,9 @@
 package com.chukanwobi.recipeapp.controllers;
 
 import com.chukanwobi.recipeapp.commands.RecipeCommand;
+import com.chukanwobi.recipeapp.services.IngredientService;
 import com.chukanwobi.recipeapp.services.RecipeService;
+import com.chukanwobi.recipeapp.services.UnitOfMeasureService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -22,16 +24,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 public class IngredientControllerTest {
-
+@Mock
+    UnitOfMeasureService unitOfMeasureService;
     @Mock
     RecipeService recipeService;
+
+    @Mock
+    IngredientService ingredientService;
     IngredientController controller;
     MockMvc mockMvc;
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        controller =  new IngredientController(recipeService);
+        controller =  new IngredientController(recipeService,unitOfMeasureService,ingredientService);
 
        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }

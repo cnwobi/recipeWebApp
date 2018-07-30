@@ -24,5 +24,8 @@ public class IngredientController {
         return "recipe/ingredient/list";
     }
 
-
+@GetMapping("/recipe/{recipeId}/ingredients/{ingredientId}/update/")
+    public String updateIngredients(@PathVariable String recipeId, @PathVariable String ingredientId,Model model){
+        return null;
+}
 }

@@ -4,7 +4,9 @@ import com.chukanwobi.recipeapp.commands.IngredientCommand;
 import com.chukanwobi.recipeapp.converters.ingredientsConverter.IngredientCommandToIngredient;
 import com.chukanwobi.recipeapp.converters.ingredientsConverter.IngredientToIngredientCommand;
 import com.chukanwobi.recipeapp.domain.Ingredient;
+import com.chukanwobi.recipeapp.domain.Recipe;
 import com.chukanwobi.recipeapp.repositories.IngredientsRepository;
+import com.chukanwobi.recipeapp.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,17 +20,14 @@ public class IngredientServiceImpl implements IngredientService {
     private final IngredientsRepository ingredientsRepository;
     private final IngredientCommandToIngredient ingredientCommandToIngredient;
     private final IngredientToIngredientCommand ingredientToIngredientCommand;
+    private final RecipeRepository recipeRepository;
 
-    public IngredientServiceImpl(IngredientsRepository
-                                         ingredientsRepository,
-                                 IngredientCommandToIngredient
-                                         ingredientCommandToIngredient,
-                                 IngredientToIngredientCommand ingredientToIngredientCommand) {
+    public IngredientServiceImpl(IngredientsRepository ingredientsRepository, IngredientCommandToIngredient ingredientCommandToIngredient, IngredientToIngredientCommand ingredientToIngredientCommand, RecipeRepository recipeRepository) {
         this.ingredientsRepository = ingredientsRepository;
         this.ingredientCommandToIngredient = ingredientCommandToIngredient;
         this.ingredientToIngredientCommand = ingredientToIngredientCommand;
+        this.recipeRepository = recipeRepository;
     }
-
 
     @Override
     public Ingredient findById(Long id) {
@@ -56,6 +55,26 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     public void deleteById(Long l) {
+
+    }
+
+    @Override
+    public IngredientCommand findByRecipeIdAndIngredientId(Long recipeId, Long ingredientId) {
+        Optional<Recipe>     recipeOptional = recipeRepository.findById(recipeId);
+        if(!recipeOptional.isPresent()){
+            new RuntimeException("recipe id not found. Id: " + recipeId);
+        }
+
+        Recipe recipe = recipeOptional.get();
+
+        Optional<IngredientCommand> ingredientCommandOptional = recipe.getIngredients().stream()
+                .filter(ingredient -> ingredient.getId().equals(ingredientId))
+                .map(ingredient -> ingredientToIngredientCommand.convert(ingredient)).findFirst();
+
+    if (!ingredientCommandOptional.isPresent()){
+        new RuntimeException("Ingredient id not found: " + ingredientId);
+    }
+return ingredientCommandOptional.get();
 
     }
 }

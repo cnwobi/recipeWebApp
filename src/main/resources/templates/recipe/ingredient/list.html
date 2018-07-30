@@ -35,7 +35,7 @@
 </aside>
 <!-- end aside.main -->
 <section class="content grid-container">
-    <header class="masthead"> Recipes
+    <header class="masthead" th:text="${recipe.description} +' Ingredients'">
     </header>
     <!-- end header.masthead -->
     <article>
@@ -56,9 +56,8 @@
                 <td th:text="${ingredient.unitOfMeasure.description}"></td>
 
 
-                <td><a th:href="@{'/recipe/'+${recipe.id}+'ingredients'+${ingredient.id}+'/update/'}" th:text="${'Update'}"></a></td>
-                <td><a th:href="@{'/recipe/'+${recipe.id}+'ingredients'+${ingredient.id}+'/delete/'}" th:text="${'Delete'}"></a></td>
--->
+                <td><a th:href="@{'/recipe/'+${recipe.id}+'/ingredients/'+${ingredient.id}+'/update/'}" th:text="${'Update'}"></a></td>
+                <td><a th:href="@{'/recipe/'+${recipe.id}+'/ingredients/'+${ingredient.id}+'/delete/'}" th:text="${'Delete'}"></a></td>
 
             </tr>
 

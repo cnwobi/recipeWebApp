@@ -5,6 +5,7 @@ import com.chukanwobi.recipeapp.converters.ingredientsConverter.IngredientComman
 import com.chukanwobi.recipeapp.converters.ingredientsConverter.IngredientToIngredientCommand;
 import com.chukanwobi.recipeapp.domain.Ingredient;
 import com.chukanwobi.recipeapp.repositories.IngredientsRepository;
+import com.chukanwobi.recipeapp.repositories.RecipeRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -21,7 +22,8 @@ public class IngredientServiceImplTest {
 
     @Mock
     IngredientsRepository ingredientsRepository;
-
+@Mock
+    RecipeRepository recipeRepository;
     @Mock
     IngredientToIngredientCommand ingredientToIngredientCommand;
     @Mock
@@ -35,7 +37,7 @@ public class IngredientServiceImplTest {
 
         ingredientOptional = Optional.of(ingredient);
         MockitoAnnotations.initMocks(this);
-        ingredientService = new IngredientServiceImpl(ingredientsRepository,ingredientCommandToIngredient,ingredientToIngredientCommand);
+        ingredientService = new IngredientServiceImpl(ingredientsRepository,ingredientCommandToIngredient,ingredientToIngredientCommand,recipeRepository);
     }
 
     @Test

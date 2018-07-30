@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Recipes</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+
+    <link rel="stylesheet" type="text/css" href="/webjars/unsemantic/1.1.3/assets/stylesheets/unsemantic-grid-responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+</head>
+
+<body >
+
+
+
+<aside class="main">
+    <div class="navbar.fixed">
+        <nav class="black" id="override">
+            <div class="nav-wrapper grid-container">
+                <ul>
+
+                    <li><a href="javascript:void(0);">About</a></li>
+                    <li><a href="javascript:void(0);">Ingredients</a></li>
+                    <li><a href="javascript:void(0);">Recipes</a></li>
+                    <li><a href="javascript:void(0);">Home</a> </li>
+                </ul>
+
+            </div>
+        </nav>
+    </div>
+
+</aside>
+<!-- end aside.main -->
+<section class="content grid-container">
+    <header class="masthead"> Recipes
+    </header>
+    <!-- end header.masthead -->
+    <article>
+        <table class="highlight responsive-table">
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Unit of Measure </th>
+
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            <tr th:each="ingredient,iterator:${recipe.ingredients}">
+                <td th:text="${iterator.index + 1}"></td>
+                <td th:text="${ingredient.description}"> Tasting goodness</td>
+                <td th:text="${ingredient.amount}">25 seconds</td>
+                <td th:text="${ingredient.unitOfMeasure.description}"></td>
+
+
+                <td><a th:href="@{'/recipe/'+${recipe.id}+'ingredients'+${ingredient.id}+'/update/'}" th:text="${'Update'}"></a></td>
+                <td><a th:href="@{'/recipe/'+${recipe.id}+'ingredients'+${ingredient.id}+'/delete/'}" th:text="${'Delete'}"></a></td>
+-->
+
+            </tr>
+
+        </table>
+    </article>
+    <!-- end article -->
+</section>
+<!-- end section.content -->
+
+<!-- end .container -->
+
+</body>
+
+<script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+</html>

@@ -134,15 +134,13 @@
         <section class="grid-100">
             <header>
                 Ingredients
-                <button class="btn btn-light">Edit
-                </button>
+                <a class="btn btn-light" th:href="@{'/recipe/' + ${recipe.id} + '/ingredients/view&edit'}" th:type="button">View & Edit
+                </a>
             </header>
             <div class="grid-100 " id="box_article">
                 <ul >
-                    <li>
-                        1. cup of rice</li>
-                    <li>
-                        2. Cups of beans</li>
+                    <li th:each="ingredient:${recipe.ingredients}" th:text="${#strings.capitalize(ingredient.description.toLowerCase())+'-'+ingredient.amount+' '+ingredient.unitOfMeasure.getDescription() }" >1 Teaspoon of chocolate</li>
+
                 </ul>
 
             </div>

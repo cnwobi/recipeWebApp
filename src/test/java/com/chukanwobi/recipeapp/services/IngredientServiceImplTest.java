@@ -6,6 +6,7 @@ import com.chukanwobi.recipeapp.converters.ingredientsConverter.IngredientToIngr
 import com.chukanwobi.recipeapp.domain.Ingredient;
 import com.chukanwobi.recipeapp.repositories.IngredientsRepository;
 import com.chukanwobi.recipeapp.repositories.RecipeRepository;
+import com.chukanwobi.recipeapp.repositories.UnitOfMeasureRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -30,6 +31,8 @@ public class IngredientServiceImplTest {
     IngredientCommandToIngredient ingredientCommandToIngredient;
     Optional<Ingredient> ingredientOptional;
     Ingredient ingredient;
+    @Mock
+    UnitOfMeasureRepository unitOfMeasureRepository;
     @Before
     public void setUp() throws Exception {
         ingredient = new Ingredient();
@@ -37,7 +40,10 @@ public class IngredientServiceImplTest {
 
         ingredientOptional = Optional.of(ingredient);
         MockitoAnnotations.initMocks(this);
-        ingredientService = new IngredientServiceImpl(ingredientsRepository,ingredientCommandToIngredient,ingredientToIngredientCommand,recipeRepository);
+        ingredientService = new IngredientServiceImpl(ingredientsRepository,
+                ingredientCommandToIngredient,
+                ingredientToIngredientCommand,
+                recipeRepository,unitOfMeasureRepository);
     }
 
     @Test

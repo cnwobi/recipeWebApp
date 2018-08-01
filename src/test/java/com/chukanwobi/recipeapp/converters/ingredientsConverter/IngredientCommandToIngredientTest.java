@@ -40,22 +40,22 @@ public void testObjectIsNotNull(){
         ingredientCommand.setId(LONG_ID);
         ingredientCommand.setDescription(DESCRIPTION);
         ingredientCommand.setAmount(AMOUNT);
-
+         RECIPE.setId(3l);
         UnitOfMeasureCommand unitOfMeasureCommand = new UnitOfMeasureCommand();
         unitOfMeasureCommand.setId(UOM_ID);
         ingredientCommand.setUnitOfMeasure(unitOfMeasureCommand);
-        ingredientCommand.setRecipe(RECIPE);
+        ingredientCommand.setRecipeId(RECIPE.getId());
 
 
         Ingredient ingredient =  converter.convert(ingredientCommand);
-
+        System.out.print(ingredient.toString());
         assertNotNull(ingredient);
         assertNotNull(ingredient.getUnitOfMeasure());
         assertEquals(LONG_ID,ingredient.getId());
         assertEquals(DESCRIPTION,ingredient.getDescription());
         assertEquals(AMOUNT,ingredient.getAmount());
 
-        assertEquals(RECIPE,ingredient.getRecipe());
+        assertEquals(RECIPE.getId(),ingredient.getRecipe().getId());
 
 
     }

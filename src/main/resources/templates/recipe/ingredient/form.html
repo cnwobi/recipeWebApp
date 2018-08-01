@@ -79,7 +79,7 @@
                             <option value="" disabled selected>Select UOM</option>
                             <option th:each="unitOfMeasure_value: ${uom}"
                                     th:value="${unitOfMeasure_value.id}"
-                                    th:selected="${unitOfMeasure_value.id.equals(ingredient.unitOfMeasure.id)}"
+                                    th:selected="${unitOfMeasure_value.equals(ingredient.unitOfMeasure)}"
                                     th:text="${unitOfMeasure_value.description}"
                             >val</option>
 

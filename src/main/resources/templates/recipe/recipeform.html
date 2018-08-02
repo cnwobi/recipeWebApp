@@ -46,7 +46,7 @@
 </section>
 
 <div class="grid-container" id="show_recipe">
-    <form th:object="${recipe}" th:action="@{/recipe/}" method="post" >
+    <form th:object="${recipe}" th:action="@{/recipe/}" method="post">
         <input type="hidden" th:field="*{id}"/>
         <section class="grid-100">
             <header> Recipe Details </header>

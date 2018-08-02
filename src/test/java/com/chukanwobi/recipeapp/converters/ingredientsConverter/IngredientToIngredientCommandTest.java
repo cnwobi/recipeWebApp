@@ -31,7 +31,11 @@ public static final Recipe RECIPE = new Recipe();
     }
     @Test
     public void testObjectIsNotNull(){
-        assertNotNull(converter.convert(new Ingredient()));
+        Ingredient ingredient = new Ingredient();
+        UnitOfMeasure unitOfMeasure = new UnitOfMeasure();
+        unitOfMeasure.setId(2L);
+        ingredient.setUnitOfMeasure(unitOfMeasure);
+        assertNotNull(converter.convert(ingredient));
     }
 
     @Test

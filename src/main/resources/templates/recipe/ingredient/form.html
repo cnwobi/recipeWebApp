@@ -48,6 +48,7 @@
 <div class="grid-container" id="show_recipe">
     <form th:object="${ingredient}" th:action="@{/recipe/{recipeId}/ingredient/}" method="post" >
         <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="${ingredient.recipeId}" th:value="${idRecipe}">
         <section class="grid-100">
             <header> Ingredient Details </header>
             <div class="grid-100 grid-parent" id="box_article">
@@ -72,17 +73,15 @@
                     <div class=" grid-25 form-group" >
 
                         <label>Unit Of Measure</label>
-                        <select class="form-control" >
+                        <select class="form-control" th:name="uom.id" th:field="${ingredient.uomId}">
 
 
 
                             <option value="" disabled selected>Select UOM</option>
-                            <option th:each="unitOfMeasure_value: ${uom}"
-                                    th:value="${unitOfMeasure_value.id}"
-                                    th:selected="${unitOfMeasure_value.equals(ingredient.unitOfMeasure)}"
-                                    th:text="${unitOfMeasure_value.description}"
-                            >val</option>
-
+                            <option th:each="uomEach : ${uom}"
+                                    th:value="${uomEach.id}"
+                                    th:selected="${uomEach.id.equals(ingredient.uomId)}"
+                                    th:text="${uomEach.description}">Each</option>
                         </select>
 
                     </div>

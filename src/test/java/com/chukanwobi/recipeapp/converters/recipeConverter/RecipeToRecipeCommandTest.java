@@ -99,6 +99,10 @@ public void testObjectIsNotNullWhenNotNullIsPassed(){
         Ingredient ingredient1 = new Ingredient();
         ingredient.setId(INGREDIENT_ID_1);
         ingredient.setId(INGREDIENT_ID_2);
+        UnitOfMeasure unitOfMeasure = new UnitOfMeasure();
+        unitOfMeasure.setId(2l);
+        ingredient.setUnitOfMeasure(unitOfMeasure);
+        ingredient1.setUnitOfMeasure(unitOfMeasure);
 
         recipe.getIngredients().add(ingredient);
         recipe.getIngredients().add(ingredient1);

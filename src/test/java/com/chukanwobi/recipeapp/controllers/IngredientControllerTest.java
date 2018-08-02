@@ -1,6 +1,8 @@
 package com.chukanwobi.recipeapp.controllers;
 
 import com.chukanwobi.recipeapp.commands.RecipeCommand;
+import com.chukanwobi.recipeapp.domain.Ingredient;
+import com.chukanwobi.recipeapp.domain.Recipe;
 import com.chukanwobi.recipeapp.services.IngredientService;
 import com.chukanwobi.recipeapp.services.RecipeService;
 import com.chukanwobi.recipeapp.services.UnitOfMeasureService;
@@ -41,5 +43,23 @@ public class IngredientControllerTest {
 
        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
+    @Test
+    public void testGetListIngredients() throws Exception{
+        RecipeCommand recipeCommand = new RecipeCommand();
+        recipeCommand.setId(1L);
 
+
+        when(recipeService.findCommandById(anyLong())).thenReturn(recipeCommand);
+        mockMvc.perform(get("/recipe/1/ingredients/view&edit"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("recipe/ingredient/list"))
+                .andExpect(model().attributeExists("recipe"));
+
+    }
+
+    @Test
+    public void updateIngredients() {
+
+
+    }
 }

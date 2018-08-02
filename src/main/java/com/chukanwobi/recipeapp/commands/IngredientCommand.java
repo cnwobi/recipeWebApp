@@ -14,5 +14,18 @@ public class IngredientCommand {
     private String description;
     private BigDecimal amount;
     private UnitOfMeasureCommand unitOfMeasure;
- private Long recipeId;
+    private Long recipeId;
+private  Long uomId;
+
+    @Override
+    public String toString() {
+        return "IngredientCommand{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", amount=" + amount +
+                ", unitOfMeasure=" + unitOfMeasure +
+                ", recipeId=" + recipeId +
+                ", uomId=" + uomId +
+                '}';
+    }
 }

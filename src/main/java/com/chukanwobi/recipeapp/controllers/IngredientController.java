@@ -1,6 +1,8 @@
 package com.chukanwobi.recipeapp.controllers;
 
 import com.chukanwobi.recipeapp.commands.IngredientCommand;
+import com.chukanwobi.recipeapp.commands.RecipeCommand;
+import com.chukanwobi.recipeapp.domain.Ingredient;
 import com.chukanwobi.recipeapp.services.IngredientService;
 import com.chukanwobi.recipeapp.services.RecipeService;
 import com.chukanwobi.recipeapp.services.UnitOfMeasureService;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.persistence.criteria.CriteriaBuilder;
 
 @Slf4j
 @Controller
@@ -46,9 +50,23 @@ public class IngredientController {
 public String saveOrUpdate(@ModelAttribute IngredientCommand command){
     IngredientCommand savedCommand = ingredientService.saveIngredientCommand(command);
 
-    log.debug("saved receipe id:" + savedCommand.getRecipeId());
+    log.debug("\n\n\n\n\nsaved receipe id:" + savedCommand.getRecipeId());
     log.debug("saved ingredient id:" + savedCommand.getId());
 
     return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredients/view&edit";
 }
+@GetMapping("recipe/{recipeId}/ingredient/new")
+    public String newRecipe (@PathVariable String recipeId,Model model){
+    RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
+
+    IngredientCommand ingredientCommand = new IngredientCommand();
+    ingredientCommand.setRecipeId(Long.valueOf(recipeId));
+    model.addAttribute("ingredient",ingredientCommand);
+
+    model.addAttribute("uom",unitOfMeasureService.findAllUnitOfMeasure());
+    return "recipe/ingredient/form";
+
+}
+
+
 }

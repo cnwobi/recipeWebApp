@@ -1,5 +1,6 @@
 package com.chukanwobi.recipeapp.controllers;
 
+import com.chukanwobi.recipeapp.commands.IngredientCommand;
 import com.chukanwobi.recipeapp.commands.RecipeCommand;
 import com.chukanwobi.recipeapp.domain.Ingredient;
 import com.chukanwobi.recipeapp.domain.Recipe;

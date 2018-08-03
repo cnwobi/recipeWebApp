@@ -47,10 +47,10 @@ public class IngredientController {
         return "recipe/ingredient/form";
 }
     @PostMapping("recipe/{recipeId}/ingredient")
-public String saveOrUpdate(@ModelAttribute IngredientCommand command){
+public String saveOrUpdate(@ModelAttribute IngredientCommand command,@PathVariable String recipeId){
     IngredientCommand savedCommand = ingredientService.saveIngredientCommand(command);
 
-    log.debug("\n\n\n\n\nsaved receipe id:" + savedCommand.getRecipeId());
+    log.debug("\n\n\n\n\nsaved recipe id:" + savedCommand.getRecipeId());
     log.debug("saved ingredient id:" + savedCommand.getId());
 
     return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredients/view&edit";
@@ -65,6 +65,13 @@ public String saveOrUpdate(@ModelAttribute IngredientCommand command){
 
     model.addAttribute("uom",unitOfMeasureService.findAllUnitOfMeasure());
     return "recipe/ingredient/form";
+
+}
+@GetMapping("recipe/{recipeId}/ingredients/{ingredientId}/delete")
+    public String delete(@PathVariable String recipeId,@PathVariable String ingredientId ){
+        ingredientService.deleteById(Long.valueOf(recipeId),Long.valueOf(ingredientId));
+
+        return "redirect:/recipe/"+ recipeId+"/ingredients/view&edit";
 
 }
 

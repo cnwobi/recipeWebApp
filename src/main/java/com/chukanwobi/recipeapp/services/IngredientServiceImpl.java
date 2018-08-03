@@ -45,10 +45,7 @@ public class IngredientServiceImpl implements IngredientService {
        return ingredientOptional.get();
     }
 
-    @Override
-    public IngredientCommand findByCommandById(Long id1) {
-        return ingredientToIngredientCommand.convert(findById(id1));
-    }
+
 
     @Override
     @Transactional
@@ -105,10 +102,6 @@ public class IngredientServiceImpl implements IngredientService {
 
     }
 
-    @Override
-    public void deleteById(Long l) {
-
-    }
 
     @Override
     public IngredientCommand findByRecipeIdAndIngredientId(Long recipeId, Long ingredientId) {
@@ -127,6 +120,29 @@ public class IngredientServiceImpl implements IngredientService {
         new RuntimeException("Ingredient id not found: " + ingredientId);
     }
 return ingredientCommandOptional.get();
+
+    }
+
+    @Override
+    public void deleteById(Long recipeId, Long idToDelete) {
+        Optional<Recipe>     recipeOptional = recipeRepository.findById(recipeId);
+        if(recipeOptional.isPresent()){
+            Recipe recipe = recipeOptional.get();
+
+            Optional<Ingredient> ingredientOptional =  recipe.getIngredients().stream()
+                    .filter(ingredient -> ingredient.getId().equals(idToDelete))
+                    .findFirst();
+            if(ingredientOptional.isPresent()){
+                log.debug("found Ingredient"+ ingredientOptional.get().toString());
+
+                Ingredient ingredientToDelete = ingredientOptional.get();
+                ingredientToDelete.setRecipe(null);
+                recipe.getIngredients().remove(ingredientOptional.get());
+            }
+
+        }else {
+            log.debug("Recipe.id not found");
+        }
 
     }
 }

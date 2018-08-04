@@ -12,4 +12,5 @@ public class DirectionCommand {
     private Long id;
     private String steps;
     private Recipe recipe;
+    private Long recipeId;
 }

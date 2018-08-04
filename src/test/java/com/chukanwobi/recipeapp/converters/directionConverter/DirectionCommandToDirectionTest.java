@@ -14,9 +14,12 @@ public class DirectionCommandToDirectionTest {
     public static final String STEPS = "cook me for 5 mins";
     public static final Recipe RECIPE = new Recipe();
 
+
     @Before
     public void setUp() throws Exception {
         converter = new DirectionCommandToDirection();
+        RECIPE.setId(2L);
+
     }
 
     @Test
@@ -36,10 +39,10 @@ public class DirectionCommandToDirectionTest {
         DirectionCommand directionCommand = new DirectionCommand();
         directionCommand.setId(LONG_VALUE);
         directionCommand.setSteps(STEPS);
-        directionCommand.setRecipe(RECIPE);
+        directionCommand.setRecipeId(RECIPE.getId());
         Direction direction= converter.convert(directionCommand);
         assertEquals(LONG_VALUE,direction.getId());
         assertEquals(STEPS,direction.getSteps());
-        assertEquals(RECIPE,direction.getRecipe());
+        assertEquals(RECIPE.getId(),direction.getRecipe().getId());
     }
 }

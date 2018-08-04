@@ -8,6 +8,7 @@ import com.chukanwobi.recipeapp.domain.Recipe;
 import com.chukanwobi.recipeapp.repositories.IngredientsRepository;
 import com.chukanwobi.recipeapp.repositories.RecipeRepository;
 import com.chukanwobi.recipeapp.repositories.UnitOfMeasureRepository;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +39,7 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     public Ingredient findById(Long id) {
+
        Optional<Ingredient> ingredientOptional = ingredientsRepository.findById(id);
        if(!ingredientOptional.isPresent()){
            new RuntimeException("Ingredient with Id {"+id+"} not found");

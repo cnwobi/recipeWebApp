@@ -139,7 +139,7 @@
         <section class="grid-100">
             <header>
                 Ingredients
-                <a class="btn btn-light" th:href="@{'/recipe/' + ${recipe.id} + '/ingredients/view&edit'}" th:type="button">View & Edit
+                <a class="btn btn-light" th:href="@{'/recipe/' + ${recipe.id} + '/ingredients/view&edit'}" th:type="button"> Edit
                 </a>
             </header>
             <div class="grid-100 " id="box_article">
@@ -152,6 +152,30 @@
 
         </section>
         <!--end of section 2-->
+        <section class="grid-100 notes">
+            <header>
+              Directions
+                <a class="btn btn-light" th:href="@{'/recipe/' + ${recipe.id} + '/directions/view&edit'}" th:type="button">Edit
+                </a>
+            </header>
+            <div class="grid-100 form-group" id="box_article">
+                <div class="input-field">
+
+                    <!--<textarea id="textarea1" class="form-control"  rows="4" th:field="*{notes.recipeNotes}"></textarea>-->
+                    <ol>
+                        <li th:each="direction:${recipe.directions}" th:text="${direction.steps}"></li>
+
+
+                    </ol>
+
+
+
+                </div>
+            </div>
+
+        </section>
+
+        <!--end of section three-->
 
         <section class="grid-100 notes">
             <header>
@@ -161,14 +185,14 @@
             <div class="grid-100 form-group" id="box_article">
                 <div class="input-field">
 
-                    <textarea id="textarea1" class="form-control"  rows="4" th:field="*{notes.recipeNotes}"></textarea>
+                    <textarea id="textarea" class="form-control"  rows="4" th:field="*{notes.recipeNotes}"></textarea>
 
                 </div>
             </div>
 
         </section>
 
-        <!--end of section three-->
+        <!--end of section 4-->
         <button type="submit" class="btn " id="btn-special">Submit</button>
     </form>
 

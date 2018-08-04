@@ -31,6 +31,7 @@ private final RecipeToRecipeCommand recipeToRecipeCommand;
         log.debug("I'm a service");
         List<Recipe> recipeSet =  new ArrayList<>();
         recipeRepository.findAll().iterator().forEachRemaining(recipeSet::add);
+
         return recipeSet;
     }
 

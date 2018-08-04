@@ -19,7 +19,9 @@ public class DirectionToDirectionCommand implements Converter<Direction,Directio
         }
         DirectionCommand directionCommand = new DirectionCommand();
         directionCommand.setId(direction.getId());
-        directionCommand.setRecipe(direction.getRecipe());
+      if(direction.getRecipe()!=null){
+          directionCommand.setRecipeId(direction.getRecipe().getId());
+      }
         directionCommand.setSteps(direction.getSteps());
         return directionCommand;
     }

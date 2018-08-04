@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${recipe.description} +' Directions'">Recipes</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/webjars/unsemantic/1.1.3/assets/stylesheets/unsemantic-grid-responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/input.css">
+</head>
+
+<body >
+
+
+
+<aside class="main">
+    <div class="navbar.fixed">
+        <nav class="black" id="override">
+            <div class="nav-wrapper grid-container">
+                <ul>
+
+                    <li><a href="javascript:void(0);">About</a></li>
+                    <li><a href="javascript:void(0);">Ingredients</a></li>
+                    <li><a href="javascript:void(0);">Recipes</a></li>
+                    <li><a href="javascript:void(0);"th:href="@{'/index'}">Home</a> </li>
+                </ul>
+
+            </div>
+        </nav>
+    </div>
+
+</aside>
+<!-- end aside.main -->
+<section class="content grid-container">
+    <header class="masthead" th:text="${recipe.description} +' Directions'">
+    </header>
+    <!-- end header.masthead -->
+    <article>
+        <table class="highlight responsive-table">
+            <tr>
+                <th>ID</th>
+                <th>Steps</th>
+
+
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            <tr th:each="direction,iterator:${recipe.directions}">
+                <td th:text="${iterator.index + 1}"></td>
+                <td th:text="${#strings.capitalize(direction.steps)}"> Tasting goodness</td>
+
+
+                <td><a th:href="@{'/recipe/'+${recipe.id}+'/directions/'+${direction.id}+'/update/'}" th:text="${'Update'}"></a></td>
+                <td><a th:href="@{'/recipe/'+${recipe.id}+'/directions/'+${direction.id}+'/delete/'}" th:text="${'Delete'}"></a></td>
+
+            </tr>
+
+        </table>
+<a th:href="@{'/recipe/'+${recipe.id}+'/update/'}">Back to Recipe Update</a>
+    </article>
+    <!-- end article -->
+    <a id="add-new" th:href="@{'/recipe/' +${recipe.id}+'/direction/new'}" th:text="${'Add Steps'}"></a>
+
+</section>
+
+<!-- end section.content -->
+
+<!-- end .container -->
+
+</body>
+
+<script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+</html>

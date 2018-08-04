@@ -36,7 +36,7 @@ converter =  new DirectionToDirectionCommand();
         direction.setSteps(STEPS);
         DirectionCommand directionCommand = converter.convert(direction);
         assertEquals(LONG_VALUE,directionCommand.getId());
-        assertEquals(RECIPE,directionCommand.getRecipe());
+        assertEquals(RECIPE.getId(),directionCommand.getRecipeId());
         assertEquals(STEPS,directionCommand.getSteps());
     }
 }

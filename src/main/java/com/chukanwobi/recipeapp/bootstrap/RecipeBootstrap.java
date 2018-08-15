@@ -69,7 +69,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         }
         Optional<UnitOfMeasure> pintUOMOptional = unitOfMeasureRepository.findByDescription("Pint");
         if(!pintUOMOptional.isPresent()){
-            throw new RuntimeException("Expected UOM no found");
+            throw new RuntimeException("Expected UOM no founds");
         }
 
         //get optionals
@@ -141,7 +141,7 @@ guacRecipe.addDirections(new Direction("Cover with plastic and chill to store: P
 
         //Yummy Tacos
         Recipe tacosRecipe = new Recipe();
-        tacosRecipe.setDescription("Spicy Grilled Chicken Taco");
+        tacosRecipe.setDescription("Spicy Grilled Chicken Tacos");
         tacosRecipe.setCookTime(9);
         tacosRecipe.setPrepTime(20);
         tacosRecipe.setDifficulty(Difficulty.MODERATE);

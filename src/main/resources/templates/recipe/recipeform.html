@@ -54,13 +54,20 @@
     <form th:object="${recipe}" th:action="@{/recipe/}" method="post">
         <input type="hidden" th:field="*{id}"/>
         <section class="grid-100">
-            <header> Recipe Details </header>
+            <header> Recipe Details
+                <a class="btn btn-light" th:href="@{'/recipe/' + ${recipe.id} + '/image/update'}" th:type="button"> Edit Image
+                </a></header>
             <div class="grid-100 grid-parent" id="box_article">
 
-                <div class="grid-100 grid-parent side form-group">
+                <div class="grid-50 grid-parent side form-group">
 
                     <h5>Recipe Description:</h5>
                     <input type="text" class="form-control" id="recipedescription" th:field="*{description}">
+
+                </div>
+                <div class="grid-50 grid-container">
+                    <img  src="../../static/images/jollof-rice-served.jpg"
+                         th:src="@{/images/jollof-rice-served.jpg}" width="200" height="200">
 
                 </div>
                 <!--end first row -->

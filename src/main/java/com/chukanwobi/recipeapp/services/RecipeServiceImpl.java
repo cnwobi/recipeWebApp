@@ -39,7 +39,7 @@ private final RecipeToRecipeCommand recipeToRecipeCommand;
     public Recipe findById(Long l) {
         Optional<Recipe> recipeOptional = recipeRepository.findById(l);
         if(!recipeOptional.isPresent()){
-            new RuntimeException("Recipe not found");
+            new RuntimeException("\n\n\nRecipe not found");
         }
         return recipeOptional.get();
     }

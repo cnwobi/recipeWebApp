@@ -51,6 +51,6 @@ public class ImageController {
         }
         response.setContentType("image/jpeg");
         InputStream inputStream = new ByteArrayInputStream(bytes);
-        IOUtils.copy(inputStream,response.getOutputStream());
+        IOUtils.copy(inputStream,response. getOutputStream());
     }
 }

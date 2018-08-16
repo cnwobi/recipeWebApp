@@ -1,10 +1,10 @@
 package com.chukanwobi.recipeapp.controllers;
 
+import com.chukanwobi.recipeapp.exceptions.NotFoundException;
 import com.chukanwobi.recipeapp.commands.RecipeCommand;
 import com.chukanwobi.recipeapp.domain.Recipe;
 import com.chukanwobi.recipeapp.repositories.RecipeRepository;
 import com.chukanwobi.recipeapp.services.RecipeService;
-import com.chukanwobi.recipeapp.services.RecipeServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -15,7 +15,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Optional;
 
-import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
@@ -30,6 +29,8 @@ public class RecipeControllerTest {
     @Mock
     RecipeService recipeService;
 
+@Mock
+        RecipeRepository recipeRepository;
 
     RecipeController controller;
 
@@ -80,4 +81,12 @@ public class RecipeControllerTest {
                 .andExpect(model().attributeExists("recipe"));
 
     }
+
+   @Test
+    public void testGetRecipeNotFound() throws Exception{
+        when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
+        mockMvc.perform(get("/recipe/1/show"))
+                .andExpect(status().isNotFound())
+        .andExpect(view().name("error"));
+   }
 }

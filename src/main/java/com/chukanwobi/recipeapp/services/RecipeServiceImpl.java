@@ -1,9 +1,11 @@
 package com.chukanwobi.recipeapp.services;
 
+import com.chukanwobi.recipeapp.commands.NotesCommand;
 import com.chukanwobi.recipeapp.commands.RecipeCommand;
 import com.chukanwobi.recipeapp.converters.recipeConverter.RecipeCommandToRecipe;
 import com.chukanwobi.recipeapp.converters.recipeConverter.RecipeToRecipeCommand;
 import com.chukanwobi.recipeapp.domain.Recipe;
+import com.chukanwobi.recipeapp.exceptions.NotFoundException;
 import com.chukanwobi.recipeapp.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -39,7 +41,8 @@ private final RecipeToRecipeCommand recipeToRecipeCommand;
     public Recipe findById(Long l) {
         Optional<Recipe> recipeOptional = recipeRepository.findById(l);
         if(!recipeOptional.isPresent()){
-            new RuntimeException("\n\n\nRecipe not found");
+            System.out.print(recipeOptional.isPresent());
+            throw new NotFoundException("\n\n\nRecipe not found");
         }
         return recipeOptional.get();
     }

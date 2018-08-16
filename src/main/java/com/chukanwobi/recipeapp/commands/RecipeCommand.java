@@ -26,7 +26,8 @@ public class RecipeCommand {
     @Min(3)
     private Integer prepTime;
 
-    @Positive
+    @PositiveOrZero
+    @NotNull
     private Integer cookTime;
     @NotNull
     @Positive

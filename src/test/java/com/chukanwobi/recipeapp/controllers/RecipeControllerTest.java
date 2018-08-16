@@ -64,7 +64,13 @@ public class RecipeControllerTest {
         when(recipeService.saveRecipeCommand(any())).thenReturn(command);
 
         mockMvc.perform(post("/recipe").contentType(MediaType.APPLICATION_FORM_URLENCODED).param("id","")
-                .param("description","Some string")).andExpect(status().is3xxRedirection())
+                .param("description","Some string")
+                .param("cookTime","24")
+                .param("source","Some Source")
+                .param("servings", "4")
+                .param("url","https://www.javadevjournal.com/spring-boot/spring-boot-internationalization/")
+                .param("prepTime","34")
+        ).andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/recipe/2/show"));
     }
 

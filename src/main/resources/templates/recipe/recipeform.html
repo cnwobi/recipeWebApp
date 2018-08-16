@@ -71,7 +71,7 @@
                 <div class="grid-50 grid-parent side form-group">
 
                     <h5>Recipe Description:</h5>
-                    <input type="text" class="form-control" id="recipedescription" th:field="*{description}" th:errorclass="has-error">
+                    <input type="text" class="form-control" id="recipedescription" th:field="*{description}" >
                     <span class="help-block" th:if="${#fields.hasErrors('description')}">
                         <ul>
                             <li th:each="err:${#fields.errors('description')}" th:text="${err}"/>
@@ -109,7 +109,7 @@
                         <input type="text" class=" form-control" th:field="*{prepTime}">
                         <span class="help-block" th:if="${#fields.hasErrors('prepTime')}">
                         <ul>
-                            <li th:each="err:${#fields.errors('prepTime')}" th:text="${'please enter number between 3 and 9999'}"/>
+                            <li th:each="err:${#fields.errors('prepTime')}" th:text="${err}"/>
                         </ul>
                     </span>
                     </div>
@@ -165,6 +165,11 @@
                     <div class=" grid-25 form-group">
                         <label>Url </label>
                         <input type="text" class="form-control" th:field="*{url}">
+                        <span class="help-block" th:if="${#fields.hasErrors('url')}">
+                        <ul>
+                            <li th:each="err:${#fields.errors('url')}" th:text="${err}"/>
+                        </ul>
+                        </span>
                     </div>
                 </div>
 

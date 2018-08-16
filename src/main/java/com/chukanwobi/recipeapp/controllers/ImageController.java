@@ -55,8 +55,5 @@ public class ImageController {
         InputStream inputStream = new ByteArrayInputStream(bytes);
         IOUtils.copy(inputStream,response. getOutputStream());
     }
-    @ExceptionHandler(ImageNotFoundException.class)
-    public void NullPointerExceptionHandler(){
-        log.debug("image not loaded");
-    }
+
 }

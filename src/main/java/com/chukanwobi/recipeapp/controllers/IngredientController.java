@@ -74,19 +74,7 @@ public String saveOrUpdate(@ModelAttribute IngredientCommand command,@PathVariab
 
 }
 
-    @ExceptionHandler(NumberFormatException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ModelAndView handleNumberFormatException (Exception e)
-    {
-        log.error("A number format exception has occurred and its being handled");
-        ModelAndView modelAndView = new ModelAndView();
-        String message = "A number formation for exception has occurred " +e.getMessage().toLowerCase()+" \n Ids must be numbers only";
 
-        modelAndView.addObject("numberFormatException",message);
-        modelAndView.setViewName("error400");
-        return modelAndView;
-
-    }
 
 
 }

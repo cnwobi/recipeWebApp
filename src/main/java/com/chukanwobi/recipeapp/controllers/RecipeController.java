@@ -21,7 +21,7 @@ public class RecipeController {
     }
     @GetMapping("/recipe/{id}/show")
     public String showById(@PathVariable String id, Model model){
-        model.addAttribute("recipe",recipeService.findById(new Long(id)));
+        model.addAttribute("recipe",recipeService.findById(Long.valueOf(id)));
         return "recipe/show";
 
 
@@ -53,9 +53,10 @@ public class RecipeController {
     }
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ModelAndView handleNotFound(){
+    public ModelAndView handleNotFound(Exception exception){
         log.error("A 404 error has occurred and its being handled");
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("exception",exception);
         modelAndView.setViewName("error");
         return modelAndView;
     }

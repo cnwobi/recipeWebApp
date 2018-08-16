@@ -49,8 +49,12 @@
     <!-- end header.masthead -->
     <article class="grid-100" id="box_article">
         <p class="notfound" style="
-    text-align:  center;">
-            The resource you were looking for was not found!
+    text-align:  center;" th:if="${exception==null}" th:text="${' The page you were looking for was not found!'}">
+
+        </p>
+        <p class="notfound" style="
+    text-align:  center;" th:if="${exception != null}" th:text="${exception.getMessage()}" >
+
         </p>
     </article>
     <!--<button type="submit" class="btn " id="btn-special">Submit</button>-->

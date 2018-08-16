@@ -96,4 +96,24 @@ savedRecipe.getDirections().stream().forEach(direction -> System.out.print("Dire
         }
     }
 
+    @Override
+    public void deleteById(Long recipeId, Long idToDelete) {
+        Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
+        if(recipeOptional.isPresent()){
+            Recipe recipe = recipeOptional.get();
+            Optional<Direction> directionOptional = recipe.getDirections()
+                    .stream().filter(direction -> direction.getId().equals(idToDelete))
+                    .findFirst();
+            if(directionOptional.isPresent()){
+                log.debug("found direction"+directionOptional.get().toString());
+
+                Direction directionToDelete =  directionOptional.get();
+                directionToDelete.setRecipe(null);
+                recipe.getDirections().remove(directionToDelete);
+            }
+        }
+        else {
+            log.debug("Recipe with ID " + recipeId+" not found");
+        }
+    }
 }

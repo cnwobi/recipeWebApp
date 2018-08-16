@@ -40,7 +40,14 @@ public class DirectionController {
 
 
     }
-@PostMapping("/recipe/{recipeId}/direction")
+    @GetMapping("recipe/{recipeId}/directions/{directionId}/delete/")
+    public String deleteDirection(@PathVariable String recipeId,@PathVariable String directionId){
+        directionService.deleteById(Long.valueOf(recipeId),Long.valueOf(directionId));
+        return "redirect:/recipe/"+ recipeId+"/directions/view&edit";
+    }
+
+
+    @PostMapping("/recipe/{recipeId}/direction")
     public String saveOrUpdate(@ModelAttribute DirectionCommand command,@PathVariable String recipeId){
         DirectionCommand savedDirectionCommand =  directionService.savedDirectionCommand(command);
         log.debug("saved recipe id: "+ savedDirectionCommand.getRecipeId());

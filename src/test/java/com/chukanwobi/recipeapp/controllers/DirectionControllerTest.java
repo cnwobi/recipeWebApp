@@ -4,6 +4,7 @@ import com.chukanwobi.recipeapp.commands.DirectionCommand;
 import com.chukanwobi.recipeapp.commands.RecipeCommand;
 import com.chukanwobi.recipeapp.converters.recipeConverter.RecipeToRecipeCommand;
 import com.chukanwobi.recipeapp.domain.Recipe;
+import com.chukanwobi.recipeapp.repositories.RecipeRepository;
 import com.chukanwobi.recipeapp.services.DirectionService;
 import com.chukanwobi.recipeapp.services.RecipeService;
 import org.junit.Before;
@@ -15,6 +16,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -27,6 +30,7 @@ public class DirectionControllerTest {
 
     @Mock
     DirectionService directionService;
+
 
     DirectionController directionController;
 
@@ -72,11 +76,11 @@ public class DirectionControllerTest {
 
     }
 
-    @Test
-    public void saveOrUpdate() {
-    }
-
-    @Test
-    public void newDirection() {
-    }
+  @Test
+    public void testDeleteDirections() throws Exception{
+       mockMvc.perform(get("/recipe/4/directions/1/delete/"))
+               .andExpect(status().is3xxRedirection())
+               .andExpect(view().name("redirect:/recipe/4/directions/view&edit"));
+verify(directionService,times(1)).deleteById(anyLong(),anyLong());
+  }
 }

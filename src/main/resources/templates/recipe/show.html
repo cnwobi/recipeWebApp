@@ -69,7 +69,8 @@
 
                         <h5> Preparation Time</h5> : <span th:text="${recipe.prepTime}+' mins'"> 20 mins</span></div>
                    <div class="grid-100">
-                       <h5>Cooking Time :</h5> <span th:text="${recipe.cookTime}+' mins'"> fd</span></div>
+                       <h5>Cooking Time :</h5> <span th:if="${recipe.cookTime!=null}" th:text="${recipe.cookTime}+' mins'"> 0 Mins</span>
+                    <span th:if="${recipe.cookTime ==null || recipe.cookTime == 0}" th:text="${'0 mins'}"> 0 Mins</span></div>
                     <div class="grid-100">
                         <h5> Source :</h5> <span th:text="${recipe.source}"> df</span></div>
                 </div>

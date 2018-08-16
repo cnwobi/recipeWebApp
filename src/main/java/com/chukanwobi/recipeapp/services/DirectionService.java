@@ -5,4 +5,5 @@ import com.chukanwobi.recipeapp.commands.DirectionCommand;
 public interface DirectionService {
     DirectionCommand findByRecipeIdAndDirectionID(Long recipeID,Long directionId);
     DirectionCommand savedDirectionCommand(DirectionCommand command);
+    void deleteById(Long recipeId,Long idToDelete);
 }

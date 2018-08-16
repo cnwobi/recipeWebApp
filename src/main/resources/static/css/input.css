@@ -92,6 +92,12 @@ padding:1%;
     height: 45px;
     padding-left: 6%;
 }
+span.help-block{
+    color: red;
+    font-size: 70%;
+    font-style: italic;
+
+}
 
 #box_article .notfound{
     text-align: center;

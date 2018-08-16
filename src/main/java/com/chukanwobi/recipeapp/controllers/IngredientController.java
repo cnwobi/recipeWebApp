@@ -8,12 +8,11 @@ import com.chukanwobi.recipeapp.services.RecipeService;
 import com.chukanwobi.recipeapp.services.UnitOfMeasureService;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.criteria.CriteriaBuilder;
 
@@ -74,6 +73,20 @@ public String saveOrUpdate(@ModelAttribute IngredientCommand command,@PathVariab
         return "redirect:/recipe/"+ recipeId+"/ingredients/view&edit";
 
 }
+
+    @ExceptionHandler(NumberFormatException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ModelAndView handleNumberFormatException (Exception e)
+    {
+        log.error("A number format exception has occurred and its being handled");
+        ModelAndView modelAndView = new ModelAndView();
+        String message = "A number formation for exception has occurred " +e.getMessage().toLowerCase()+" \n Ids must be numbers only";
+
+        modelAndView.addObject("numberFormatException",message);
+        modelAndView.setViewName("error400");
+        return modelAndView;
+
+    }
 
 
 }

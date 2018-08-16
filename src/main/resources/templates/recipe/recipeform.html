@@ -55,8 +55,13 @@
         <input type="hidden" th:field="*{id}"/>
         <section class="grid-100">
             <header> Recipe Details
-                <a class="btn btn-light" th:href="@{'/recipe/' + ${recipe.id} + '/image/update'}" th:type="button"> Edit Image
-                </a></header>
+
+                <a  class="btn btn-light" th:if="${recipe.id == null}" th:remove="all"  th:type="button"> Edit Image
+                </a>
+
+                <a  class="btn btn-light" th:if="${recipe.id != null}"  th:href="@{'/recipe/' + ${recipe.id} + '/image/update'}" th:type="button"> Edit Image
+                </a>
+            </header>
             <div class="grid-100 grid-parent" id="box_article">
 
                 <div class="grid-50 grid-parent side form-group">

@@ -128,3 +128,7 @@ td {
     font-weight: bold;
     text-align: center;
 }
+article .float-right{
+
+    float: right !important;
+}

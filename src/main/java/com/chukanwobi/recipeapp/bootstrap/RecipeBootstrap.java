@@ -21,7 +21,6 @@ import java.util.Optional;
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
     private CategoryRepository categoryRepository;
-    private IngredientsRepository ingredientsRepository;
     private RecipeRepository recipeRepository;
     private UnitOfMeasureRepository unitOfMeasureRepository;
 
@@ -35,7 +34,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
     public RecipeBootstrap(CategoryRepository categoryRepository, IngredientsRepository ingredientsRepository, RecipeRepository recipeRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
         this.categoryRepository = categoryRepository;
-        this.ingredientsRepository = ingredientsRepository;
+        IngredientsRepository ingredientsRepository1 = ingredientsRepository;
         this.recipeRepository = recipeRepository;
         this.unitOfMeasureRepository = unitOfMeasureRepository;
     }

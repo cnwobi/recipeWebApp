@@ -8,134 +8,143 @@
       initial-scale=1,
       minimum-scale=1,
       maximum-scale=1
-    " />
+    "/>
     <title th:text=" ${recipe.description}">Recipes</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" type="text/css" href="/css/unsemantic-grid-responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/recipeshow.css">
 </head>
 
 <body>
-    <aside class="main">
-        <div class="navbar.fixed">
-            <nav class="black" id="override">
-                <div class="nav-wrapper grid-container">
-                    <ul >
+<aside class="main">
+    <div class="navbar.fixed">
+        <nav class="black" id="override">
+            <div class="nav-wrapper grid-container">
+                <ul>
 
-                        <li><a href="javascript:void(0);">About</a></li>
-                        <li><a href="javascript:void(0);">Ingredients</a></li>
-                        <li><a href="javascript:void(0);">Recipes</a></li>
-                        <li><a href="javascript:void(0);" th:href="@{'/index'}">Home</a> </li>
-                    </ul>
+                    <li><a href="javascript:void(0);">About</a></li>
+                    <li><a href="javascript:void(0);">Ingredients</a></li>
+                    <li><a href="javascript:void(0);">Recipes</a></li>
+                    <li><a href="javascript:void(0);" th:href="@{'/index'}">Home</a></li>
+                </ul>
+
+            </div>
+        </nav>
+    </div>
+
+</aside>
+<section class="grid-100">
+    <header th:text="${recipe.description} + ' details' "> Recipe Descriptions</header>
+
+
+</section>
+
+<div class="grid-container" id="show_recipe">
+    <section class="grid-100">
+        <header> Recipe Descriptions</header>
+        <div class="grid-100 " id="box_article">
+            <div class="grid-100 categories grid-parent">
+                <div class="grid-50 grid-container" id="categories">
+                    <div class="grid-100">
+                        <h5>Categories:</h5>
+                        <ul class="catgories">
+                            <li th:each="category:${recipe.categories}" th:text="${category.description}">American</li>
+                        </ul>
+                    </div>
+                    <div class="grid-100">
+
+                        <h5> Preparation Time :</h5> : <span th:text="${recipe.prepTime}+' mins'"> 20 mins</span></div>
+                    <div class="grid-100">
+                        <h5>Cooking Time :</h5> <span th:if="${recipe.cookTime!=null}" th:text="${recipe.cookTime}+' mins'"> 0 Mins</span>
+
+                    </div>
+                    <div class="grid-100"th:unless="${recipe.source==null}">
+                        <h5> Source :</h5> <span th:text="${recipe.source}"> df</span></div>
+                    <div class="grid-100 ">
+
+                        <h5> Difficulty : </h5><span th:if="${recipe.difficulty !=null}"
+                                                     th:text="${#strings.capitalize(recipe.difficulty.toString().toLowerCase())}"> Easy</span>
+                    </div>
+                    <div class="grid-100">
+                        <h5>Servings :</h5> <span th:text="${recipe.servings}">4</span></div>
+                    <div class="grid-100">
+                        <h5> URL :</h5> <span th:text="${recipe.url}"> example.com</span></div>
+                </div>
+                <div class="grid-50 grid-container">
+                    <img src="../../static/images/jollof-rice-serveda.jpg"
+                         th:src="@{'/recipe/'+${recipe.id}+'/recipeimage'}" width="100%" height="100%">
 
                 </div>
-            </nav>
-        </div>
 
-    </aside>
+            </div>
+            <!--end of categories div-->
+
+
+            <div class="grid-50 grid-parent">
+
+
+            </div>
+
+
+            <div class="grid-50 grid-parent">
+
+            </div>
+        </div>
+        <!-- end of box article-->
+
+    </section>
+
     <section class="grid-100">
-        <header th:text="${recipe.description} + ' details' "> Recipe Descriptions</header>
+        <header>Ingredients</header>
+        <article class="grid-100" id="box_article">
+            <ul id="box_article_ul">
+                <li th:remove="all">1 Cup of milk</li>
+                <li th:each="ingredient:${recipe.ingredients}"
+                    th:text="${#strings.capitalize(ingredient.description.toLowerCase())+'-'+ingredient.amount+' '+ingredient.unitOfMeasure.getDescription() }">
+                    1 Teaspoon of chocolate
+                </li>
+
+            </ul>
+
+
+        </article>
 
 
     </section>
 
-    <div class="grid-container" id="show_recipe">
-        <section class="grid-100">
-            <header> Recipe Descriptions</header>
-            <div class="grid-100 " id="box_article">
-                <div class="grid-100 categories grid-parent">
-                    <div class="grid-50 grid-container" id="categories">
-                        
-                        <h5>Categories:</h5>
-                        <ul class="catgories" >
-                        <li th:each="category:${recipe.categories}" th:text="${category.description}">American</li>
 
-                        </ul>
-                    </div>
-                   <div class="grid-50 grid-container">
-                       <img src="../../static/images/jollof-rice-serveda.jpg"
-                       th:src="@{'/recipe/'+${recipe.id}+'/recipeimage'}" width="200" height="200">
-
-                   </div>
-
-                </div>
-                <!--end of categories div-->
-
-
-                <div class="grid-50 grid-parent">
-
-                    <div class="grid-100">
-
-                        <h5> Preparation Time</h5> : <span th:text="${recipe.prepTime}+' mins'"> 20 mins</span></div>
-                   <div class="grid-100">
-                       <h5>Cooking Time :</h5> <span th:if="${recipe.cookTime!=null}" th:text="${recipe.cookTime}+' mins'"> 0 Mins</span>
-                    <span th:if="${recipe.cookTime ==null || recipe.cookTime == 0}" th:text="${'0 mins'}"> 0 Mins</span></div>
-                    <div class="grid-100">
-                        <h5> Source :</h5> <span th:text="${recipe.source}"> df</span></div>
-                </div>
-
-
-
-
-
-
-                <div class="grid-50 grid-parent">
-                   <div class="grid-100 ">
-
-                       <h5> Difficulty : </h5><span th:if="${recipe.difficulty !=null}"   th:text="${#strings.capitalize(recipe.difficulty.toString().toLowerCase())}"> Easy</span></div>
-                    <div class="grid-100">
-                        <h5>Servings :</h5> <span th:text="${recipe.servings}">4</span></div>
-                    <div class="grid-100">
-                        <h5>  URL :</h5> <span th:text="${recipe.url}"> example.com</span></div>
-                </div>
-            </div>
-            <!-- end of box article-->
-
-        </section>
-
-        <section class="grid-100">
-            <header>Ingredients</header>
-            <article class="grid-100" id="box_article">
-                <ul id="box_article_ul">
-                    <li th:remove="all">1 Cup of milk </li>
-                    <li th:each="ingredient:${recipe.ingredients}" th:text="${#strings.capitalize(ingredient.description.toLowerCase())+'-'+ingredient.amount+' '+ingredient.unitOfMeasure.getDescription() }">1 Teaspoon of chocolate</li>
-
-                </ul>
-
-
-            </article>
-
-
-        </section>
-
-
-        <section class="grid-100">
-            <header>Direction</header>
-            <article class="grid-100" id="box_article" >
-         <ol>
+    <section class="grid-100">
+        <header>Direction</header>
+        <article class="grid-100" id="box_article">
+            <ol>
                 <li th:each="direction:${recipe.directions}" th:utext="${direction.steps}"></li>
-         </ol>
-            </article>
+            </ol>
+        </article>
 
-        </section>
+    </section>
 
-        <section class="grid-100">
-            <header>Notes</header>
-            <article class="grid-100" id="box_article" >
-                <div th:utext="${recipe.notes.recipeNotes}">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</div>
+    <section class="grid-100">
+        <header>Notes</header>
+        <article class="grid-100" id="box_article">
+            <div th:utext="${recipe.notes.recipeNotes}">Contrary to popular belief, Lorem Ipsum is not simply random
+                text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
+                Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more
+                obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in
+                classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and
+                1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC.
+                This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of
+                Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+            </div>
 
-            </article>
+        </article>
 
-        </section>
-
-
-    </div>
-    <!-- end of all div show recipe-->
+    </section>
 
 
-
-
+</div>
+<!-- end of all div show recipe-->
 
 
 </body>

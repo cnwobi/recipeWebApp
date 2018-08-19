@@ -1,3 +1,12 @@
 #show_recipe h5 {
     font-weight: bolder;
 }
+@media
+only screen and (max-width: 760px),
+(min-device-width: 268px) and (max-device-width: 1024px) {
+    .responsive header {
+        font-size: 100%;
+        padding-right: 30%;
+        font-weight: bold;
+    }
+}

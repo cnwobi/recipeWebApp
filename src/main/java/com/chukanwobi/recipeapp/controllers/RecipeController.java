@@ -42,6 +42,9 @@ public class RecipeController {
             bindingResult.getAllErrors().forEach(objectError -> {log.debug(objectError.toString());});
             return "recipe/recipeform";
         }
+        if (command.getId()!=null){
+            command.setImage(recipeService.findCommandById(command.getId()).getImage());
+        }
         RecipeCommand savedCommand =  recipeService.saveRecipeCommand(command);
 
         return "redirect:/recipe/" + savedCommand.getId()+"/show";

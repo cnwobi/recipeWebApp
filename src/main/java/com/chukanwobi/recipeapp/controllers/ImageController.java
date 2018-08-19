@@ -50,6 +50,7 @@ public class ImageController {
         int i = 0;
         for (Byte b : recipeCommand.getImage()){
             bytes[i++] = b;
+            log.debug(b.toString()+"nothingpiol");
         }
         response.setContentType("image/jpeg");
         InputStream inputStream = new ByteArrayInputStream(bytes);

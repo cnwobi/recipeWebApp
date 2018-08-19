@@ -35,7 +35,7 @@
     </div>
 
 </aside>
-<section class="grid-100">
+<section class="grid-100 responsive">
     <header th:text="${recipe.description} + ' details' "> Recipe Descriptions</header>
 
 
@@ -72,12 +72,16 @@
                     <div class="grid-100">
                         <h5> URL :</h5> <span th:text="${recipe.url}"> example.com</span></div>
                 </div>
-                <div class="grid-50 grid-container">
-                    <img src="../../static/images/jollof-rice-serveda.jpg"
+                <div class="grid-50 grid-container" th:unless="${recipe.image==null}">
+                    <img
                          th:src="@{'/recipe/'+${recipe.id}+'/recipeimage'}" width="100%" height="100%">
 
                 </div>
+                <div class="grid-50 grid-container" th:unless="${recipe.image!=null}" >
+                    <img th:src="@{/images/jpg-icon.png}"
+                          width="200" height="200">
 
+                </div>
             </div>
             <!--end of categories div-->
 

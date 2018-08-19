@@ -141,10 +141,13 @@ article .float-right{
 @media
 only screen and (max-width: 760px),
 (min-device-width: 268px) and (max-device-width: 1024px) {
-
+.responsive header{
+    font-weight: bolder;
+}
     /* Force table to not be like tables anymore */
     table, thead, tbody, th, td, tr {
         display: block;
+        font-size: 125%;
     }
 
     /* Hide table headers (but not display: none;, for accessibility) */
